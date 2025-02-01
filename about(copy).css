@@ -37,6 +37,7 @@ html, body {
 /* Header & Navigation */
 nav {
   height: var(--navbar-height);
+  background: linear-gradient(to top, rgba(128,128,128,0), rgba(128,128,128,0.8));
   position: fixed;
   top: 0;
   width: 100%;
@@ -200,43 +201,40 @@ a:hover,
   .mobile-text-container {
     display: block;
     position: absolute;
-    bottom: 40vh;
+    /* Hier den Button 70px vom unteren Rand positionieren, also ca. 20px über dem Footer */
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     z-index: 2;
   }
   #hello-btn {
-    font-size: 60px;
+    font-size: 20px;
     padding: 10px 20px;
-    background: rgba(255, 255, 255, 0);  /* Transparenter Hintergrund */
-    backdrop-filter: blur(1px);           /* Unschärfe für den Hintergrund */
-    -webkit-backdrop-filter: blur(1px);   /* WebKit-Prefix für Safari u.ä. */
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    border-radius: 3px;
+    border-radius: 8px;
     color: white;
     cursor: pointer;
   }
   #hello-btn:hover {
-    background: rgba(255, 255, 255, 0.2);  /* Transparenter Hintergrund */
-    backdrop-filter: blur(2px);           /* Unschärfe für den Hintergrund */
-    -webkit-backdrop-filter: blur(2px);   /* WebKit-Prefix für Safari u.ä. */
+    background: rgba(255, 255, 255, 0.3);
   }
   /* Popup Styling mit Milchglas-Effekt */
   .popup {
     display: none;
-    position: left;
+    position: top;
     left: 5vw;         /* 5% Abstand zum linken Rand */
     right: 5vw;        /* 5% Abstand zum rechten Rand */
-    bottom: 10vh;      /* 10% Abstand vom unteren Rand */
+    bottom: 10vh;      /* Popup vom unteren Rand entfernt */
     width: calc(100vw - 10vw);  /* Breite: 100vw minus 10vw (5vw links + 5vw rechts) */
     background: rgba(255, 255, 255, 0.2);  /* Transparenter Hintergrund */
     backdrop-filter: blur(10px);           /* Unschärfe für den Hintergrund */
-    -webkit-backdrop-filter: blur(10px);   /* WebKit-Prefix für Safari u.ä. */
-    border-radius: 3px;
+    -webkit-backdrop-filter: blur(10px);   /* WebKit-Prefix für Safari etc. */
+    border-radius: 12px;
     padding: 20px;
     z-index: 1001;
-    color: white;
+    color: #333;
   }
   .popup-content {
     position: relative;
@@ -251,14 +249,14 @@ a:hover,
     cursor: pointer;
     background: transparent;
     border: none;
-    color: white;
+    color: #333;
   }
 }
 
 /* Footer */
 footer {
   width: 100%;
-
+  background: linear-gradient(to top, rgba(128,128,128,0.5), rgba(128,128,128,0));
   position: absolute;
   bottom: 0;
   left: 0;
