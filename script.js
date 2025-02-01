@@ -25,18 +25,4 @@ document.addEventListener("DOMContentLoaded", function () {
         evt.preventDefault();
         scroller.scrollLeft += evt.deltaY * scrollSpeed;
     });
-
-    // Touch-Swipe Unterstützung für mobiles Scrollen
-    let touchStartX = 0;
-    scroller.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].clientX;
-    });
-
-    scroller.addEventListener("touchmove", (e) => {
-        if (touchStartX !== 0) {
-            const touchDeltaX = touchStartX - e.touches[0].clientX;
-            scroller.scrollLeft += touchDeltaX * 0.5;
-            touchStartX = e.touches[0].clientX;
-        }
-    });
 });
