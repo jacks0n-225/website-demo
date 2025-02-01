@@ -200,9 +200,9 @@ a:hover,
   }
   .mobile-text-container {
     display: block;
-    position: bottom;
+    position: absolute;
     /* Hier den Button 70px vom unteren Rand positionieren, also ca. 20px über dem Footer */
-    bottom: 20px;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
