@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Integrierte Seite: Header, Footer & Scrolling Text</title>
+  <title>About – JGVISUALS</title>
   <link rel="stylesheet" href="about(copy).css">
 </head>
 <body>
@@ -31,16 +31,19 @@
     <ul>
       <li><a href="index.html">HOME</a></li>
       <li><a href="product.html">PRODUCT</a></li>
-      <li><a href="product.html">3D</a></li>
+      <li><a href="3d.html">3D</a></li>
       <li><a href="about.html">ABOUT</a></li>
     </ul>
   </div>
 
-  <!-- Main Content: Bild-Hintergrund mit Scrolling Text -->
+  <!-- Main Content -->
   <main>
     <div class="image-container">
+      <!-- Hintergrundbild -->
       <img src="img/img212.jpg" alt="Background Image">
-      <div class="scrolling-text-container">
+      
+      <!-- Desktop-Version: Scrolling Text -->
+      <div class="scrolling-text-container desktop">
         <p id="scrolling-text">
           <span class="word visible">Hello!</span>
           <span class="word space"></span>
@@ -127,23 +130,6 @@
           <span class="word">emotion</span>
           <span class="word">and</span>
           <span class="word">expression.</span>
-          <span class="word">The</span>
-          <span class="word">addition</span>
-          <span class="word">of</span>
-          <span class="word">CGI</span>
-          <span class="word">allows</span>
-          <span class="word">me</span>
-          <span class="word">to</span>
-          <span class="word">construct</span>
-          <span class="word">imaginative</span>
-          <span class="word">realities</span>
-          <span class="word">that</span>
-          <span class="word">enhance</span>
-          <span class="word">and</span>
-          <span class="word">elevate</span>
-          <span class="word">my</span>
-          <span class="word">visual</span>
-          <span class="word">storytelling.</span>
           <span class="word">For</span>
           <span class="word">opportunities</span>
           <span class="word">to</span>
@@ -160,6 +146,24 @@
           <span class="word">out.</span>
         </p>
       </div>
+      
+      <!-- Mobile-Version: Button und Popup -->
+      <div class="mobile-text-container">
+        <button id="hello-btn">Hello!</button>
+        <div id="popup" class="popup">
+          <div class="popup-content">
+            <button class="popup-close" id="popup-close">&#10005;</button>
+            <p id="popup-text">
+              I'm Jakob Giggenbach, a dedicated photography student with a focus on Foto-Design at the University of Applied Sciences in Munich.
+              My creative heart beats for the intersection of Fashion, Product Photography, and Film. I seek to weave narratives into every shot,
+              blending the elegance of fashion with the precision of product aesthetics. My films extend these stories into dynamic sequences,
+              filled with emotion and expression. The addition of CGI allows me to construct imaginative realities that enhance and elevate my visual storytelling.
+              For opportunities to collaborate or to see more of my work, please reach out.
+            </p>
+          </div>
+        </div>
+      </div>
+      
     </div>
   </main>
 
