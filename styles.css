@@ -196,10 +196,3 @@ footer {
         display: none;
     }
 }
-
-/* Mobile Ansicht: Scrollrichtung beibehalten und Touch-Scroll anpassen */
-@media (max-width: 700px) {
-    .image-scroller {
-        touch-action: pan-x; /* Erlaubt horizontales Scrollen mit Touch */
-    }
-}
