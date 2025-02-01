@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color: #808080;
+    --text-color: #FFFFFF;
+    --navbar-height: 10vh;
+}
+
+@font-face {
+    font-family: 'Greycliff';
+    src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
+         url('fonts/GreycliffCF-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Greycliff';
+    src: url('fonts/GreycliffCF-Bold.woff2') format('woff2'),
+         url('fonts/GreycliffCF-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+html, body {
+    height: 100%;
+    background-color: #222;
+    font-family: 'Greycliff', Arial, sans-serif;
+    font-weight: thin;
+    overflow: hidden;
+}
+
+nav {
+    height: var(--navbar-height);
+    background: linear-gradient(to top, rgba(128, 128, 128, 0), rgba(128, 128, 128, 0.8));
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    padding: 15px 20px;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 35px;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.nav-links {
+    display: none;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.toggle_button {
+    width: 30px;
+    height: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.bar {
+    height: 5px;
+    width: 100%;
+    background: var(--text-color);
+    border-radius: 100px;
+}
+
+/* Menü für mobile Ansicht */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+.menu-overlay.active {
+    transform: translateX(0);
+}
+
+/* Menü Links */
+.menu-overlay ul {
+    list-style: none;
+    text-align: center;
+}
+
+.menu-overlay li {
+    margin: 20px 0;
+}
+
+.menu-overlay a {
+    font-size: 32px;
+    color: white;
+    text-decoration: none;
+}
+
+/* X-Button für Menü */
+.close_button {
+    position: absolute;
+    top: 10px;
+    right: 22px;
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Hover-Effekt für alle Links und Buttons */
+a:hover, .toggle_button:hover, .close_button:hover {
+    color: #6f6f6f; /*  Hover-Farbe */
+}
+
+.toggle_button:hover .bar {
+    background-color: #6f6f6f; /*  Farbe für die Hamburger-Balken */
+}
+
+/* About */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.who-am-i-button {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.who-am-i-button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Text-Overlay */
+.text-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+.text-overlay .overlay-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 4px;
+    text-align: justify;
+    font-size: 14px;
+}
+
+.text-overlay .overlay-content p {
+    margin-bottom: 15px;
+}
+
+/* X-Button oben rechts im Popup */
+.text-overlay .overlay-content #close-popup {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    font-size: 30px;
+    color: white;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    background: linear-gradient(to top, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0));
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imprint-link {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+/* Scrollbar ausblenden */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Desktop-Ansicht: Menü sichtbar, Hamburger-Button ausblenden */
+@media (min-width: 700px) {
+    .nav-links {
+        display: flex;
+    }
+
+    .toggle_button {
+        display: none;
+    }
+}
