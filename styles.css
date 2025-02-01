@@ -1,198 +1,266 @@
+/* Reset und Grundlegende Einstellungen */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --background-color: #808080;
-    --text-color: #FFFFFF;
-    --navbar-height: 10vh;
+  --background-color: #808080;
+  --text-color: #FFFFFF;
+  --navbar-height: 10vh;
+}
+
+/* Font Faces */
+@font-face {
+  font-family: 'Greycliff';
+  src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
+       url('fonts/GreycliffCF-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Greycliff';
-    src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
-         url('fonts/GreycliffCF-Medium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Greycliff';
-    src: url('fonts/GreycliffCF-Bold.woff2') format('woff2'),
-         url('fonts/GreycliffCF-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'Greycliff';
+  src: url('fonts/GreycliffCF-Bold.woff2') format('woff2'),
+       url('fonts/GreycliffCF-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
 }
 
 html, body {
-    height: 100%;
-    font-family: 'Greycliff', Arial, sans-serif;
-    font-weight: thin;
-    overflow: hidden;
+  height: 100%;
+  font-family: 'Greycliff', Arial, sans-serif;
+  /* Hinweis: "thin" ist kein Standardwert – ggf. anpassen */
+  overflow: hidden;
 }
 
-nav {
-    height: var(--navbar-height);
-    background: linear-gradient(to top, rgba(128, 128, 128, 0), rgba(128, 128, 128, 0.8));
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: top;
-    padding: 15px 20px;
-    z-index: 10;
+
+/* Desktop Sidebar (wird ab 700px angezeigt) */
+.desktop-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
 }
 
-.logo {
-    font-size: 35px;
-    text-decoration: none;
-    color: var(--text-color);
+/* Logo oben */
+.desktop-sidebar .logo-wrapper {
+  width: 100%;
+  text-align: center;
 }
 
-.nav-links {
-    display: none;
-    list-style: none;
-    gap: 20px;
+.desktop-sidebar .logo {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
-.nav-links li {
-    display: inline;
+/* Menü-Punkte vertikal angeordnet und mittig im Viewport */
+.desktop-sidebar .nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  /* Flexbox zur vertikalen Anordnung */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Zentrierung im Viewport */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 20px;
+.desktop-sidebar .nav-links li {
+  /* Sicherstellen, dass jedes Listenelement blockweise angezeigt wird */
+  display: block;
+  margin: 15px 0;
 }
 
+.desktop-sidebar .nav-links a {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Imprint-Link unten */
+.desktop-sidebar .imprint-link {
+  font-size: 18px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+
+
+/* Mobile Header */
+.mobile-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+ background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.mobile-header .logo {
+  font-size: 35px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* Toggle Button & Hamburger Bars (Mobile) */
 .toggle_button {
-    width: 30px;
-    height: 23px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
+  width: 30px;
+  height: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .bar {
-    height: 4px;
-    width: 100%;
-    background: var(--text-color);
-    border-radius: 100px;
+  height: 4px;
+  width: 100%;
+  background: var(--text-color);
+  border-radius: 100px;
 }
 
-/* Menü für mobile Ansicht */
+/* Menu Overlay (Mobile) */
 .menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(100%);
-    transition: transform 0.4s ease-in-out;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+   background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 1000;
 }
 
 .menu-overlay.active {
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
-/* Menü Links */
 .menu-overlay ul {
-    list-style: none;
-    text-align: center;
+  list-style: none;
+  text-align: center;
 }
 
 .menu-overlay li {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .menu-overlay a {
-    font-size: 32px;
-    color: white;
-    text-decoration: none;
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
 }
 
 /* X-Button */
 .close_button {
-    position: absolute;
-    top: 10px;
-    right: 22px;
-    font-size: 40px;
-    cursor: pointer;
-    color: white;
-}
-/* Hover-Effekt für alle Links und Buttons */
-a:hover, .toggle_button:hover, .close_button:hover {
-    color: #6f6f6f; /*  Hover-Farbe */
-}
-.toggle_button:hover .bar {
-    background-color: #6f6f6f; /*  Farbe für die Hamburger-Balken */
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  font-size: 40px;
+  cursor: pointer;
+  color: white;
 }
 
-/* Horizontales Scrollen */
+/* Hover-Effekte */
+a:hover, .toggle_button:hover, .close_button:hover {
+  color: #6f6f6f;
+}
+.toggle_button:hover .bar {
+  background-color: #6f6f6f;
+}
+
+/* Horizontales Scrolling */
 .image-scroller {
-    width: 100vw;
-    height: 100vh;
-    background: #222;
-    overflow-x: auto;
-    display: flex;
-    scroll-behavior: smooth;
+  width: 100vw;
+  height: 100vh;
+  background: #222;
+  overflow-x: auto;
+  display: flex;
+  scroll-behavior: smooth;
 }
 
 .image-wrapper {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    width: 90vw;
-    height: 100vh;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 90vw;
+  height: 100vh;
 }
 
 .image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Footer */
-footer {
-    width: 100%;
-    background: linear-gradient(to top, rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0));
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Mobile Footer */
+.mobile-footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: center;  /* Zentriert horizontal */
+  align-items: center;      /* Zentriert vertikal, falls nötig */
+  padding: 10px;
+  text-align: center;
 }
 
-.imprint-link {
-    color: var(--text-color);
-    text-decoration: none;
+.mobile-footer .imprint-link {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 /* Scrollbar ausblenden */
 ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+  width: 0;
+  height: 0;
 }
 
-/* Desktop-Ansicht: Menü sichtbar, Hamburger-Button ausblenden */
+/* Media Queries */
 @media (min-width: 700px) {
-    .nav-links {
-        display: flex;
-    }
+  /* Desktop: Sidebar einblenden, Mobile-Header und -Footer ausblenden */
+  .desktop-sidebar {
+    display: flex;
+  }
+  .mobile-header,
+  .mobile-footer {
+    display: none;
+  }
+}
 
-    .toggle_button {
-        display: none;
-    }
+@media (max-width: 699px) {
+  /* Mobile: Desktop-Sidebar ausblenden */
+  .desktop-sidebar {
+    display: none;
+  }
 }
