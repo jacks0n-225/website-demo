@@ -120,7 +120,7 @@ html, body {
 }
 
 .mobile-header .logo {
-  font-size: 35px;
+  font-size: 30px;
   text-decoration: none;
   color: var(--text-color);
 }
