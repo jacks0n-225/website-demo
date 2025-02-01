@@ -202,7 +202,7 @@ a:hover,
     display: block;
     position: absolute;
     /* Hier den Button 70px vom unteren Rand positionieren, also ca. 20px über dem Footer */
-    bottom: 70px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
