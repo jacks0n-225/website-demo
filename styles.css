@@ -31,10 +31,45 @@
 html, body {
   height: 100%;
   font-family: 'Greycliff', Arial, sans-serif;
-  /* Hinweis: "thin" ist kein Standardwert – ggf. anpassen */
   overflow: hidden;
 }
 
+/* Start Overlay */
+#start-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.3); /* Transparente Milchglas-Optik */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2000;  /* Über allen anderen Elementen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease-in-out;
+}
+
+/* Container für das Logo im Overlay */
+.overlay-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Diese Klasse wird per JS hinzugefügt, um den Slide-Up Effekt auszulösen */
+#start-overlay.slide-up {
+  transform: translateY(-100%);
+}
+
+/* Das Logo auf ca. 5vh Höhe skalieren */
+.overlay-logo-container img {
+  height: 15vh;
+  width: auto;
+  cursor: pointer;
+}
 
 /* Desktop Sidebar (wird ab 700px angezeigt) */
 .desktop-sidebar {
@@ -66,13 +101,9 @@ html, body {
   list-style: none;
   margin: 0;
   padding: 0;
-  
-  /* Flexbox zur vertikalen Anordnung */
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  /* Zentrierung im Viewport */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,7 +111,6 @@ html, body {
 }
 
 .desktop-sidebar .nav-links li {
-  /* Sicherstellen, dass jedes Listenelement blockweise angezeigt wird */
   display: block;
   margin: 15px 0;
 }
@@ -102,8 +132,6 @@ html, body {
   color: var(--text-color);
 }
 
-
-
 /* Mobile Header */
 .mobile-header {
   position: fixed;
@@ -113,7 +141,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
- background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
@@ -149,7 +177,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100vh;
-   background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -228,8 +256,8 @@ a:hover, .toggle_button:hover, .close_button:hover {
   position: fixed;
   bottom: 0;
   width: 100%;
-  justify-content: center;  /* Zentriert horizontal */
-  align-items: center;      /* Zentriert vertikal, falls nötig */
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   text-align: center;
 }
@@ -248,7 +276,6 @@ a:hover, .toggle_button:hover, .close_button:hover {
 
 /* Media Queries */
 @media (min-width: 700px) {
-  /* Desktop: Sidebar einblenden, Mobile-Header und -Footer ausblenden */
   .desktop-sidebar {
     display: flex;
   }
@@ -259,7 +286,6 @@ a:hover, .toggle_button:hover, .close_button:hover {
 }
 
 @media (max-width: 699px) {
-  /* Mobile: Desktop-Sidebar ausblenden */
   .desktop-sidebar {
     display: none;
   }
