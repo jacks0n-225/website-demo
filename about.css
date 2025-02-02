@@ -396,6 +396,8 @@ main {
 .mobile-imprint-content p {
   text-align: justify;
   margin: 20px 0;
+    font-size: 10px;
+  color: white;
 }
 .mobile-imprint-close-btn {
   text-align: right;
