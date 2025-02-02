@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Mobile Menü (unverändert)
+  // Mobile Menü
   const menu = document.getElementById("menu");
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Mobile Menü-Elemente nicht gefunden!");
   }
   
-  // Desktop Sidebar (unverändert)
+  // Desktop Sidebar
   const sidebarExpandBtn = document.getElementById("sidebar-expand-btn");
   const desktopSidebar = document.getElementById("desktop-sidebar");
   if (sidebarExpandBtn && desktopSidebar) {
@@ -35,20 +35,37 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Desktop Sidebar-Schließ-Button nicht gefunden!");
   }
   
-  // Mobile Erweiterung: Umschalten des mobilen Headers
+  // Mobile Erweiterung: Umschalten des mobilen Headers über den Expand-Button
   const mobileHeader = document.getElementById("mobile-header");
   const mobileExpandBtn = document.getElementById("mobile-expand-btn");
   if (mobileHeader && mobileExpandBtn) {
     mobileExpandBtn.addEventListener("click", function () {
       mobileHeader.classList.toggle("expanded");
-      // Aktualisiere das Icon im Button: Bei erweitert X, sonst Pfeil (→)
+      // Aktualisiere das Icon im Button:
+      // Im geschlossenen Zustand zeigen wir einen Pfeil nach unten (&#8595;),
+      // im erweiterten Zustand ein Schließsymbol (&#10005;)
       if (mobileHeader.classList.contains("expanded")) {
         mobileExpandBtn.innerHTML = "<span class='arrow'>&#10005;</span>";
       } else {
-        mobileExpandBtn.innerHTML = "<span class='arrow'>&#8594;</span>";
+        mobileExpandBtn.innerHTML = "<span class='arrow'>&#8595;</span>";
       }
     });
   } else {
     console.error("❌ Mobile Erweiterungselemente nicht gefunden!");
+  }
+  
+  // Schließ-X im mobilen Erweiterungsbereich
+  const mobileCloseBtn = document.getElementById("mobile-close-btn");
+  if (mobileCloseBtn && mobileHeader) {
+    mobileCloseBtn.addEventListener("click", function () {
+      mobileHeader.classList.remove("expanded");
+      // Setze das Icon im Expand-Button zurück (Pfeil nach unten)
+      const mobileExpandBtn = document.getElementById("mobile-expand-btn");
+      if (mobileExpandBtn) {
+        mobileExpandBtn.innerHTML = "<span class='arrow'>&#8595;</span>";
+      }
+    });
+  } else {
+    console.error("❌ Mobile Close-Button im Erweiterungsbereich nicht gefunden!");
   }
 });
