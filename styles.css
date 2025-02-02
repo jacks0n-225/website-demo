@@ -48,7 +48,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 1s ease-in-out;
+  transition: transform 0.4s ease-in-out;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Container für das Logo im Overlay */
@@ -58,13 +59,12 @@ html, body {
   align-items: center;
 }
 
-
 /* Diese Klasse wird per JS hinzugefügt, um den Slide-Up Effekt auszulösen */
 #start-overlay.slide-up {
   transform: translateY(-100%);
 }
 
-/* Das Logo auf ca. 5vh Höhe skalieren */
+/* Das Logo auf ca. 15vh Höhe skalieren (hier kannst du nach Bedarf anpassen) */
 .overlay-logo-container img {
   height: 15vh;
   width: auto;
@@ -82,6 +82,8 @@ html, body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 20px;
+  /* Schlagschatten an der rechten Kante */
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Logo oben */
@@ -145,6 +147,7 @@ html, body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-header .logo {
@@ -187,6 +190,7 @@ html, body {
   transform: translateX(100%);
   transition: transform 0.4s ease-in-out;
   z-index: 1000;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .menu-overlay.active {
