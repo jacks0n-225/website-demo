@@ -8,10 +8,10 @@
   --background-color: #808080;
   --text-color: #FFFFFF;
   --navbar-height: 60px;  /* Höhe der oberen Zeile (Logo/Hamburger) */
-  --mobile-btn-height: 40px; /* Höhe des Erweiterungs-Buttons */
-  --closed-header-height: calc(var(--navbar-height) + var(--mobile-btn-height)); /* z. B. 100px */
+  --mobile-btn-size: 60px;
 }
 
+/* --- Schriftarten --- */
 @font-face {
   font-family: 'Greycliff';
   src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
@@ -33,14 +33,45 @@ html, body {
   overflow: hidden;
 }
 
-/* --- DESKTOP SIDEBAR (unverändert) --- */
+/* --- Allgemeine Hover-Regeln für Links, Buttons, etc. --- */
+a,
+button,
+.toggle_button .bar,
+.desktop-sidebar .logo,
+.imprint-link,
+.mobile-footer .imprint-link,
+.mobile-close-btn span.x,
+.close_button,
+.menu-overlay a {
+  transition: color 0.3s;
+}
+
+/* Explizite Hover-Regeln für Desktop-Elemente */
+.desktop-sidebar .logo:hover,
+.desktop-sidebar .nav-links a:hover,
+.desktop-sidebar .imprint-link:hover {
+  color: darkgrey;
+}
+
+/* Explizite Hover-Regeln für Mobile-Elemente */
+.header-top .logo:hover,
+.mobile-footer .imprint-link:hover {
+  color: darkgrey;
+}
+
+/* Zusätzlich: Hamburger-Toggle – bei Hover wechseln die Bars zu dunkelgrau */
+.toggle_button:hover .bar {
+  background-color: darkgrey;
+}
+
+/* --- DESKTOP SIDEBAR --- */
 .desktop-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 30vw;
   height: 100vh;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 20px;
@@ -91,46 +122,16 @@ html, body {
 .desktop-sidebar.expanded .sidebar-expanded-text {
   display: none;
 }
-.sidebar-expand-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translateX(100%);
-  width: 5vw;
-  height: 100%;
-  background: transparent;
-  border: none;
-  color: var(--text-color);
-  font-size: 2em;
-  cursor: pointer;
-  z-index: 101;
-  transition: background 0.3s;
-}
-.sidebar-expand-btn:hover {
-  background: rgba(0,0,0,0.2);
-}
-.sidebar-close-btn {
-  display: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: var(--text-color);
-  font-size: 2em;
-  cursor: pointer;
-  z-index: 102;
-}
-.desktop-sidebar.expanded .sidebar-close-btn {
-  display: block;
-}
 .sidebar-expanded-text {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  margin-top: 60px;
+  position: fixed;        /* Damit sich der Container relativ zum Viewport positioniert */
+  top: 50%;               /* Vertikale Mitte */
+  left: 50%;              /* Horizontale Mitte */
+  transform: translate(-50%, -50%);  /* Exakte Zentrierung */
   padding: 0 20px;
   color: var(--text-color);
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  display: none;
 }
 .desktop-sidebar.expanded .sidebar-expanded-text {
   display: block;
@@ -140,21 +141,63 @@ html, body {
   text-align: justify;
 }
 
-/* --- MOBILE HEADER (als erweiterbarer Container) --- */
+/* --- Desktop Erweiterungs- & Schließ-Buttons --- */
+/* Container selbst reagiert nicht auf Klicks, sondern nur das umschlossene <span> */
+.sidebar-expand-btn,
+.sidebar-close-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: default;
+  font-size: 2em;
+  padding: 5px;
+  z-index: 101;
+  pointer-events: none;
+}
+
+.sidebar-close-btn:hover span.x {
+  color: darkgrey;
+}
+.sidebar-expand-btn span,
+.sidebar-close-btn span {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Vertikale Zentrierung des Expand-Buttons */
+.sidebar-expand-btn {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) translateX(100%);
+}
+.sidebar-expand-btn:hover span {
+  color: darkgrey;
+}
+.sidebar-close-btn {
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+.desktop-sidebar.expanded .sidebar-close-btn {
+  display: block;
+}
+
+/* --- MOBILE HEADER --- */
 .mobile-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--closed-header-height);
-  background: rgba(0,0,0,0.1);
+  /* Header umfasst nur die obere Zeile */
+  height: var(--navbar-height);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 110;
   overflow: hidden;
   transition: height 0.5s ease;
 }
-/* Im erweiterten Zustand wächst der Header auf 100vh */
 .mobile-header.expanded {
   height: 100vh;
 }
@@ -167,7 +210,7 @@ html, body {
   align-items: center;
   padding: 0 20px;
   position: relative;
-  z-index: 999;  /* Damit Logo und Hamburger immer oben bleiben */
+  z-index: 999;
 }
 .header-top .logo {
   font-size: 30px;
@@ -175,7 +218,7 @@ html, body {
   text-decoration: none;
 }
 
-/* Hamburger-Menü (Toggle-Button) – einfach wie gehabt */
+/* Hamburger-Menü (Toggle-Button) */
 .toggle_button {
   width: 30px;
   height: 23px;
@@ -189,63 +232,86 @@ html, body {
   width: 100%;
   background: var(--text-color);
   border-radius: 100px;
-}
-
-/* Erweiterungs-Button: Direkt unterhalb der Header-Top */
-.mobile-expand-btn {
-  width: 100%;
-  height: var(--mobile-btn-height);
-  background: rgba(0,0,0,0);
-  border: none;
-  color: var(--text-color);
-  font-size: 1.5em;
-  cursor: pointer;
   transition: background 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-}
-.mobile-expand-btn:hover {
-  background: rgba(0,0,0,0);
-}
-/* Das Pfeil-Icon im Button: Standardmäßig um 90° gedreht (→ wird zu ↓) */
-.mobile-expand-btn .arrow {
-  display: inline-block;
-  transform: rotate(90deg);
-  transition: transform 0.3s;
 }
 
-/* Erweiterter Inhalt (Milchglas-Bereich), der unterhalb des Buttons liegt */
+/* Erweiterter Inhalt im Mobile Header */
 .mobile-expanded-content {
   width: 100%;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
   padding: 0 20px;
-    color: white;
+  color: var(--text-color);
 }
 .mobile-header.expanded .mobile-expanded-content {
-  max-height: calc(100vh - var(--closed-header-height));
+  max-height: calc(100vh - var(--navbar-height));
   opacity: 1;
-  padding: 20px;
+  padding: 20px 40px;
 }
 .mobile-expanded-content p {
+  margin-top: 20px;
   text-align: justify;
-  margin: 0;
+  margin-bottom: 0;
 }
 
-/* --- MOBILE MENU OVERLAY (unverändert) --- */
+/* Schließ-X im mobilen Bereich */
+.mobile-close-btn {
+  text-align: center;
+  font-size: 1.5em;
+  cursor: default;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  transition: color 0.3s;
+  pointer-events: none;
+}
+.mobile-close-btn span.x {
+  pointer-events: auto;
+  cursor: pointer;
+}
+.mobile-close-btn:hover span.x {
+  color: darkgrey;
+}
+
+/* --- MOBILE ERWEITERUNGS-BUTTON --- */
+/* Der Button erstreckt sich in voller Breite, aber nur das Symbol ist klickbar */
+.mobile-expand-btn {
+  display: block;
+  width: 100%;
+  height: var(--mobile-btn-size);
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: var(--navbar-height);
+  transition: background 0.3s;
+  pointer-events: none;
+}
+.mobile-expand-btn span.arrow {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.mobile-expand-btn span.arrow:hover {
+  color: darkgrey;
+}
+.mobile-expand-btn:hover {
+  background: transparent;
+}
+
+/* --- MOBILE MENU OVERLAY --- */
 .menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
@@ -254,7 +320,7 @@ html, body {
   align-items: center;
   transform: translateX(100%);
   transition: transform 0.4s ease-in-out;
-  z-index: 1000;
+  z-index: 120;
 }
 .menu-overlay.active {
   transform: translateX(0);
@@ -270,6 +336,10 @@ html, body {
   font-size: 32px;
   color: var(--text-color);
   text-decoration: none;
+  transition: color 0.3s;
+}
+.menu-overlay a:hover {
+  color: darkgrey;
 }
 .close_button {
   position: absolute;
@@ -278,9 +348,10 @@ html, body {
   font-size: 40px;
   cursor: pointer;
   color: var(--text-color);
+  transition: color 0.3s;
 }
 
-/* --- MAIN – Statisches Hintergrundbild (unverändert) --- */
+/* --- MAIN – Statisches Hintergrundbild --- */
 main {
   position: fixed;
   top: 0;
@@ -291,24 +362,24 @@ main {
   z-index: -1;
 }
 
-/* --- MOBILE FOOTER (unverändert) --- */
+/* --- MOBILE FOOTER --- */
 .mobile-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(0,0,0,0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  z-index: 200;  /* Damit der Imprint-Link immer sichtbar bleibt */
 }
 .mobile-footer .imprint-link {
   font-size: 18px;
   color: var(--text-color);
   text-decoration: none;
+  transition: color 0.3s;
 }
 
 /* --- SCROLLBAR VERSTECKEN --- */
@@ -321,6 +392,7 @@ main {
 @media (min-width: 700px) {
   .desktop-sidebar { display: block; }
   .mobile-header,
+  .mobile-expand-btn,
   .mobile-footer { display: none; }
 }
 @media (max-width: 699px) {
