@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Menü-Funktionalität (bestehender Code)
   const menu = document.getElementById("menu");
   const menuToggle = document.getElementById("menu-toggle");
   const menuClose = document.getElementById("menu-close");
@@ -25,4 +26,19 @@ document.addEventListener("DOMContentLoaded", function () {
     evt.preventDefault();
     scroller.scrollLeft += evt.deltaY * scrollSpeed;
   });
+
+  // Start Overlay: Beim Klick auf das Logo im Overlay wird es nach oben geschoben
+  const startOverlay = document.getElementById("start-overlay");
+  if (startOverlay) {
+    const logoOverlay = startOverlay.querySelector("img");
+    if (logoOverlay) {
+      logoOverlay.addEventListener("click", function(){
+        startOverlay.classList.add("slide-up");
+        // Nach Ende der Transition das Overlay entfernen oder verstecken
+        startOverlay.addEventListener("transitionend", function() {
+          startOverlay.style.display = "none";
+        }, { once: true });
+      });
+    }
+  }
 });
