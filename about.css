@@ -33,7 +33,7 @@ html, body {
   overflow: hidden;
 }
 
-/* --- Allgemeine Hover-Regeln für Links, Buttons, etc. --- */
+/* --- Allgemeine Hover-Regeln --- */
 a,
 button,
 .toggle_button .bar,
@@ -46,20 +46,18 @@ button,
   transition: color 0.4s;
 }
 
-/* Explizite Hover-Regeln für Desktop-Elemente */
+/* Desktop-Hover */
 .desktop-sidebar .logo:hover,
 .desktop-sidebar .nav-links a:hover,
 .desktop-sidebar .imprint-link:hover {
   color: darkgrey;
 }
 
-/* Explizite Hover-Regeln für Mobile-Elemente */
+/* Mobile-Hover */
 .header-top .logo:hover,
 .mobile-footer .imprint-link:hover {
   color: darkgrey;
 }
-
-/* Zusätzlich: Hamburger-Toggle – bei Hover wechseln die Bars zu dunkelgrau */
 .toggle_button:hover .bar {
   background-color: darkgrey;
 }
@@ -67,7 +65,7 @@ button,
 /* --- DESKTOP SIDEBAR --- */
 .desktop-sidebar {
   position: fixed;
-  top: 0;
+  top: 42px; /* Standard: 42px – aber für Desktop ändern wir das in einem Media Query */
   left: 0;
   width: 30vw;
   height: 100vh;
@@ -80,11 +78,23 @@ button,
   z-index: 100;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
+/* Bei Desktop (min-width:700px) setzen wir top:0, damit nichts nach unten verschoben wird */
+@media (min-width: 700px) {
+  .desktop-sidebar {
+    top: 0;
+  }
+}
+
+/* Wenn erweitert, nimmt die Sidebar 100vw ein */
 .desktop-sidebar.expanded {
   width: 100vw;
 }
+/* Sobald die Sidebar erweitert ist – egal ob About oder Imprint – sollen die Navigationspunkte ausgeblendet werden */
+.desktop-sidebar.expanded .nav-links {
+  display: none;
+}
+
 .desktop-sidebar .logo-wrapper {
-  width: 100%;
   text-align: center;
 }
 .desktop-sidebar .logo {
@@ -110,7 +120,8 @@ button,
   text-decoration: none;
   color: var(--text-color);
 }
-.desktop-sidebar .imprint-link {
+/* Desktop Imprint-Link */
+.desktop-imprint-link {
   font-size: 18px;
   position: absolute;
   bottom: 20px;
@@ -119,16 +130,14 @@ button,
   text-decoration: none;
   color: var(--text-color);
 }
-.desktop-sidebar.expanded .nav-links,
-.desktop-sidebar.expanded .sidebar-expanded-text {
-  display: none;
-}
-.sidebar-expanded-text {
-  position: fixed;        /* Damit sich der Container relativ zum Viewport positioniert */
-  top: 50%;               /* Vertikale Mitte */
-  left: 50%;              /* Horizontale Mitte */
-  transform: translate(-50%, -50%);  /* Exakte Zentrierung */
-  padding: 0 20px;
+
+/* Erweiterte Inhalte */
+.sidebar-expanded-text,
+.sidebar-expanded-imprint {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: var(--text-color);
   transition: opacity 0.5s ease;
   opacity: 0;
@@ -138,12 +147,25 @@ button,
   display: block;
   opacity: 1;
 }
-.sidebar-expanded-text p {
+/* Bei Imprint-Aktivierung: About-Inhalt ausblenden, Imprint-Inhalt anzeigen */
+.desktop-sidebar.imprint-active .sidebar-expanded-text {
+  display: none;
+}
+.desktop-sidebar.imprint-active .sidebar-expanded-imprint {
+  display: block;
+  opacity: 1;
+}
+/* Für den Imprint-Text: Breite so, dass links und rechts 5vw Abstand zum Bildschirm sind */
+.sidebar-expanded-imprint {
+  width: calc(100vw - 10vw);
+  font-size: 12px;
+}
+.sidebar-expanded-text p,
+.sidebar-expanded-imprint p {
   text-align: justify;
 }
 
-/* --- Desktop Erweiterungs- & Schließ-Buttons --- */
-/* Container selbst reagiert nicht auf Klicks, sondern nur das umschlossene <span> */
+/* --- Desktop Buttons --- */
 .sidebar-expand-btn,
 .sidebar-close-btn {
   position: absolute;
@@ -156,24 +178,15 @@ button,
   z-index: 101;
   pointer-events: none;
 }
-
-.sidebar-close-btn:hover span.x {
-  color: darkgrey;
-}
 .sidebar-expand-btn span,
 .sidebar-close-btn span {
   pointer-events: auto;
   cursor: pointer;
 }
-
-/* Vertikale Zentrierung des Expand-Buttons */
 .sidebar-expand-btn {
   top: 50%;
   right: 0;
   transform: translateY(-50%) translateX(100%);
-}
-.sidebar-expand-btn:hover span {
-  color: darkgrey;
 }
 .sidebar-close-btn {
   top: 10px;
@@ -190,7 +203,6 @@ button,
   top: 0;
   left: 0;
   width: 100%;
-  /* Header umfasst nur die obere Zeile */
   height: var(--navbar-height);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
@@ -203,8 +215,6 @@ button,
 .mobile-header.expanded {
   height: 100vh;
 }
-
-/* Obere Zeile: Logo und Hamburger-Menü */
 .header-top {
   height: var(--navbar-height);
   display: flex;
@@ -220,7 +230,7 @@ button,
   text-decoration: none;
 }
 
-/* Hamburger-Menü (Toggle-Button) */
+/* Hamburger Toggle */
 .toggle_button {
   width: 30px;
   height: 23px;
@@ -237,13 +247,12 @@ button,
   transition: background 0.3s;
 }
 
-/* Erweiterter Inhalt im Mobile Header */
+/* Mobile expanded content (About-Text) */
 .mobile-expanded-content {
   width: 100%;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0);
   transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
   padding: 0 20px;
   color: var(--text-color);
@@ -256,54 +265,38 @@ button,
 .mobile-expanded-content p {
   margin-top: 20px;
   text-align: justify;
-  margin-bottom: 0;
 }
 
-/* Schließ-X im mobilen Bereich */
+/* Mobile Close-Button */
 .mobile-close-btn {
   text-align: center;
   font-size: 1.5em;
   cursor: default;
   color: var(--text-color);
   margin-bottom: 10px;
-  transition: color 0.3s;
   pointer-events: none;
 }
 .mobile-close-btn span.x {
   pointer-events: auto;
   cursor: pointer;
 }
-.mobile-close-btn:hover span.x {
-  color: darkgrey;
-}
 
-/* --- MOBILE ERWEITERUNGS-BUTTON --- */
-/* Der Button erstreckt sich in voller Breite, aber nur das Symbol ist klickbar */
+/* --- MOBILE Erweiterungs-Button --- */
 .mobile-expand-btn {
   display: block;
   width: 100%;
   height: var(--mobile-btn-size);
-  margin: 0;
-  padding: 0;
   background: transparent;
   border: none;
   color: var(--text-color);
   font-size: 1.5em;
   text-align: center;
   margin-top: var(--navbar-height);
-  transition: background 0.4s;
   pointer-events: none;
 }
 .mobile-expand-btn span.arrow {
   pointer-events: auto;
   cursor: pointer;
-  transition: color 0.3s;
-}
-.mobile-expand-btn span.arrow:hover {
-  color: darkgrey;
-}
-.mobile-expand-btn:hover {
-  background: transparent;
 }
 
 /* --- MOBILE MENU OVERLAY --- */
@@ -339,10 +332,6 @@ button,
   font-size: 32px;
   color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s;
-}
-.menu-overlay a:hover {
-  color: darkgrey;
 }
 .close_button {
   position: absolute;
@@ -351,7 +340,6 @@ button,
   font-size: 40px;
   cursor: pointer;
   color: var(--text-color);
-  transition: color 0.3s;
 }
 
 /* --- MAIN – Statisches Hintergrundbild --- */
@@ -371,18 +359,50 @@ main {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0);
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  z-index: 200;  /* Damit der Imprint-Link immer sichtbar bleibt */
+  z-index: 200;
 }
 .mobile-footer .imprint-link {
   font-size: 18px;
   color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s;
+}
+
+/* --- MOBILE IMPRINT PANEL --- */
+.mobile-imprint-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);  /* Hier evtl. den Alpha-Wert erhöhen, z.B. rgba(0, 0, 0, 0.5) */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  padding: 0 20px;
+  z-index: 150;
+}
+.mobile-imprint-panel.expanded {
+  max-height: 100vh;
+  opacity: 1;
+  padding: 20px 40px;
+}
+.mobile-imprint-content p {
+  text-align: justify;
+  margin: 20px 0;
+}
+.mobile-imprint-close-btn {
+  text-align: right;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-color);
+  margin-bottom: 10px;
 }
 
 /* --- SCROLLBAR VERSTECKEN --- */
@@ -396,7 +416,8 @@ main {
   .desktop-sidebar { display: block; }
   .mobile-header,
   .mobile-expand-btn,
-  .mobile-footer { display: none; }
+  .mobile-footer,
+  .mobile-imprint-panel { display: none; }
 }
 @media (max-width: 699px) {
   .desktop-sidebar { display: none; }
