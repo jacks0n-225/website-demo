@@ -1,17 +1,17 @@
-/* Reset und Grundlegende Einstellungen */
+/* --- RESET & GRUNDSTILE --- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 :root {
   --background-color: #808080;
   --text-color: #FFFFFF;
-  --navbar-height: 10vh;
+  --navbar-height: 60px;  /* Höhe der oberen Zeile (Logo/Hamburger) */
+  --mobile-btn-size: 60px;
 }
 
-/* Font Faces */
+/* --- Schriftarten --- */
 @font-face {
   font-family: 'Greycliff';
   src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
@@ -19,7 +19,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Greycliff';
   src: url('fonts/GreycliffCF-Bold.woff2') format('woff2'),
@@ -31,50 +30,42 @@
 html, body {
   height: 100%;
   font-family: 'Greycliff', Arial, sans-serif;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-/* Start Overlay */
-#start-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.3); /* Transparente Milchglas-Optik */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 2000;  /* Über allen anderen Elementen */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.4s ease-in-out;
-  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+/* --- Allgemeine Hover-Regeln --- */
+a,
+button,
+.toggle_button .bar,
+.desktop-sidebar .logo,
+.imprint-link,
+.mobile-footer .imprint-link,
+.mobile-close-btn span.x,
+.close_button,
+.menu-overlay a {
+  transition: color 0.4s;
 }
 
-/* Container für das Logo im Overlay */
-.overlay-logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Desktop-Hover */
+.desktop-sidebar .logo:hover,
+.desktop-sidebar .nav-links a:hover,
+.desktop-sidebar .imprint-link:hover {
+  color: darkgrey;
 }
 
-/* Diese Klasse wird per JS hinzugefügt, um den Slide-Up Effekt auszulösen */
-#start-overlay.slide-up {
-  transform: translateY(-100%);
+/* Mobile-Hover */
+.header-top .logo:hover,
+.mobile-footer .imprint-link:hover {
+  color: darkgrey;
+}
+.toggle_button:hover .bar {
+  background-color: darkgrey;
 }
 
-/* Das Logo auf ca. 15vh Höhe skalieren (hier kannst du nach Bedarf anpassen) */
-.overlay-logo-container img {
-  height: 15vh;
-  width: auto;
-  cursor: pointer;
-}
-
-/* Desktop Sidebar (wird ab 700px angezeigt) */
+/* DESKTOP SIDEBAR */
 .desktop-sidebar {
   position: fixed;
-  top: 0;
+  top: 42px; /* Standard: 42px – später per Media Query angepasst */
   left: 0;
   width: 30vw;
   height: 100vh;
@@ -82,13 +73,27 @@ html, body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 20px;
-  /* Schlagschatten an der rechten Kante */
+  transition: width 0.4s ease;
+  overflow: visible;
+  z-index: 100;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Logo oben */
+@media (min-width: 700px) {
+  .desktop-sidebar {
+    top: 0;
+  }
+}
+
+.desktop-sidebar.expanded {
+  width: 100vw; /* Erweitert die Sidebar auf die volle Breite */
+}
+
+.desktop-sidebar.expanded .nav-links {
+  display: none;
+}
+
 .desktop-sidebar .logo-wrapper {
-  width: 100%;
   text-align: center;
 }
 
@@ -98,11 +103,8 @@ html, body {
   color: var(--text-color);
 }
 
-/* Menü-Punkte vertikal angeordnet und mittig im Viewport */
 .desktop-sidebar .nav-links {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,7 +115,6 @@ html, body {
 }
 
 .desktop-sidebar .nav-links li {
-  display: block;
   margin: 15px 0;
 }
 
@@ -123,8 +124,8 @@ html, body {
   color: var(--text-color);
 }
 
-/* Imprint-Link unten */
-.desktop-sidebar .imprint-link {
+/* IMPRINT-BEREICH DESKTOP */
+.desktop-imprint-link {
   font-size: 18px;
   position: absolute;
   bottom: 20px;
@@ -134,20 +135,62 @@ html, body {
   color: var(--text-color);
 }
 
-/* Mobile Header */
+.sidebar-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.desktop-sidebar.expanded .sidebar-close-btn {
+  display: block;
+}
+
+.sidebar-expanded-imprint {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-color);
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  display: none;
+  font-size: 12px;
+  text-align: justify;
+}
+
+.desktop-sidebar.expanded.imprint-active .sidebar-expanded-imprint {
+  display: block;
+  opacity: 1;
+}
+
+
+/* MOBILE HEADER & IMPRINT */
 .mobile-header {
   position: fixed;
   top: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  background: rgba(0,0,0,0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
-  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 0 6px rgba(0,0,0,0.5);
+}
+
+.header-top {
+  height: var(--navbar-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
 
 .mobile-header .logo {
@@ -156,7 +199,6 @@ html, body {
   color: var(--text-color);
 }
 
-/* Toggle Button & Hamburger Bars (Mobile) */
 .toggle_button {
   width: 30px;
   height: 23px;
@@ -173,7 +215,60 @@ html, body {
   border-radius: 100px;
 }
 
-/* Menu Overlay (Mobile) */
+/* Mobile erweiterter Imprint-Inhalt */
+.mobile-expanded-content {
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  padding: 0 20px;
+  color: var(--text-color);
+}
+
+.mobile-header.expanded .mobile-expanded-content {
+  max-height: calc(100vh - var(--navbar-height));
+  opacity: 1;
+  padding: 20px 40px;
+}
+.mobile-expanded-content p {
+  margin-top: 20px;
+  text-align: justify;
+}
+
+.mobile-header.expanded .imprint-content {
+  display: none;
+}
+.mobile-header.expanded.imprint-active .about-content {
+  display: none;
+}
+
+.mobile-imprint-close-btn {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 20px;
+}
+.mobile-header.expanded.imprint-active .imprint-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navbar-height));
+  padding: 0; /* Standard-Padding überschreiben */
+}
+
+/* Scrollbarer Textbereich im Imprint-Bereich mit festem Abstand zu allen Bildschirmrändern */
+.mobile-imprint-text {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin: 0 20px 80px 20px; /* 20px Abstand links, rechts und unten */
+  font-size: 12px;
+}
+
+/* Da der "About Expand-Pfeil" nicht benötigt wird, entfernen wir dessen Styles */
+
+/* MENU OVERLAY (MOBILE) */
 .menu-overlay {
   position: fixed;
   top: 0;
@@ -212,7 +307,6 @@ html, body {
   text-decoration: none;
 }
 
-/* X-Button */
 .close_button {
   position: absolute;
   top: 10px;
@@ -222,15 +316,7 @@ html, body {
   color: white;
 }
 
-/* Hover-Effekte */
-a:hover, .toggle_button:hover, .close_button:hover {
-  color: #6f6f6f;
-}
-.toggle_button:hover .bar {
-  background-color: #6f6f6f;
-}
-
-/* Horizontales Scrolling */
+/* HORIZONTALES SCROLLING */
 .image-scroller {
   width: 100vw;
   height: 100vh;
@@ -254,12 +340,13 @@ a:hover, .toggle_button:hover, .close_button:hover {
   object-fit: cover;
 }
 
-/* Mobile Footer */
+/* MOBILE FOOTER */
 .mobile-footer {
-  display: flex;
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -270,27 +357,23 @@ a:hover, .toggle_button:hover, .close_button:hover {
   font-size: 18px;
   text-decoration: none;
   color: var(--text-color);
+  cursor: pointer;
 }
 
-/* Scrollbar ausblenden */
+/* SCROLLBAR AUSBLENDEN */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-/* Media Queries */
+/* --- MEDIA QUERIES --- */
 @media (min-width: 700px) {
-  .desktop-sidebar {
-    display: flex;
-  }
+  .desktop-sidebar { display: block; }
   .mobile-header,
-  .mobile-footer {
-    display: none;
-  }
+  .mobile-expand-btn,
+  .mobile-footer { display: none; }
+}
+@media (max-width: 699px) {
+  .desktop-sidebar { display: none; }
 }
 
-@media (max-width: 699px) {
-  .desktop-sidebar {
-    display: none;
-  }
-}
