@@ -65,7 +65,7 @@ button,
 /* --- DESKTOP SIDEBAR --- */
 .desktop-sidebar {
   position: fixed;
-  top: 42px; /* Standard: 42px – aber für Desktop ändern wir das in einem Media Query */
+  top: 42px; /* Standard: 42px – später per Media Query angepasst */
   left: 0;
   width: 30vw;
   height: 100vh;
@@ -78,18 +78,14 @@ button,
   z-index: 100;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
-/* Bei Desktop (min-width:700px) setzen wir top:0, damit nichts nach unten verschoben wird */
 @media (min-width: 700px) {
   .desktop-sidebar {
     top: 0;
   }
 }
-
-/* Wenn erweitert, nimmt die Sidebar 100vw ein */
 .desktop-sidebar.expanded {
   width: 100vw;
 }
-/* Sobald die Sidebar erweitert ist – egal ob About oder Imprint – sollen die Navigationspunkte ausgeblendet werden */
 .desktop-sidebar.expanded .nav-links {
   display: none;
 }
@@ -120,7 +116,6 @@ button,
   text-decoration: none;
   color: var(--text-color);
 }
-/* Desktop Imprint-Link */
 .desktop-imprint-link {
   font-size: 18px;
   position: absolute;
@@ -131,7 +126,7 @@ button,
   color: var(--text-color);
 }
 
-/* Erweiterte Inhalte */
+/* Erweiterte Inhalte (Desktop) */
 .sidebar-expanded-text,
 .sidebar-expanded-imprint {
   position: fixed;
@@ -147,7 +142,6 @@ button,
   display: block;
   opacity: 1;
 }
-/* Bei Imprint-Aktivierung: About-Inhalt ausblenden, Imprint-Inhalt anzeigen */
 .desktop-sidebar.imprint-active .sidebar-expanded-text {
   display: none;
 }
@@ -155,9 +149,7 @@ button,
   display: block;
   opacity: 1;
 }
-/* Für den Imprint-Text: Breite so, dass links und rechts 5vw Abstand zum Bildschirm sind */
 .sidebar-expanded-imprint {
-  width: calc(100vw - 10vw);
   font-size: 12px;
 }
 .sidebar-expanded-text p,
@@ -247,7 +239,7 @@ button,
   transition: background 0.3s;
 }
 
-/* Mobile expanded content (About-Text) */
+/* --- Mobile Expanded Content (sowohl About als auch Imprint) --- */
 .mobile-expanded-content {
   width: 100%;
   max-height: 0;
@@ -267,11 +259,45 @@ button,
   text-align: justify;
 }
 
-/* Mobile Close-Button */
+/* Steuerung, welcher Inhalt angezeigt wird:
+   - Ohne "imprint-active" wird der About-Content gezeigt.
+   - Mit "imprint-active" wird der Imprint-Content sichtbar. */
+.mobile-header.expanded .imprint-content {
+  display: none;
+}
+.mobile-header.expanded.imprint-active .about-content {
+  display: none;
+}
+.mobile-header.expanded.imprint-active .imprint-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navbar-height));
+  padding: 0; /* Standard-Padding überschreiben */
+}
+
+/* Fixierter Close-Button im Imprint-Bereich */
+.mobile-imprint-close-btn {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 20px;
+}
+
+/* Scrollbarer Textbereich im Imprint-Bereich mit festem Abstand zu allen Bildschirmrändern */
+.mobile-imprint-text {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin: 0 20px 80px 20px; /* 20px Abstand links, rechts und unten */
+  font-size: 12px;
+}
+
+/* Mobile Close-Button (im About-Bereich) */
 .mobile-close-btn {
   text-align: center;
   font-size: 1.5em;
-  cursor: default;
+  cursor: pointer;
   color: var(--text-color);
   margin-bottom: 10px;
   pointer-events: none;
@@ -372,54 +398,12 @@ main {
   text-decoration: none;
 }
 
-/* --- MOBILE IMPRINT PANEL --- */
-.mobile-imprint-panel {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.1);  /* Hier evtl. den Alpha-Wert erhöhen, z.B. rgba(0, 0, 0, 0.5) */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-  padding: 0 20px;
-  z-index: 150;
-}
-.mobile-imprint-panel.expanded {
-  max-height: 100vh;
-  opacity: 1;
-  padding: 20px 40px;
-}
-.mobile-imprint-content p {
-  text-align: justify;
-  margin: 20px 0;
-    font-size: 10px;
-  color: white;
-}
-.mobile-imprint-close-btn {
-  text-align: right;
-  font-size: 1.5em;
-  cursor: pointer;
-  color: var(--text-color);
-  margin-bottom: 10px;
-}
-
-/* --- SCROLLBAR VERSTECKEN --- */
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
 /* --- MEDIA QUERIES --- */
 @media (min-width: 700px) {
   .desktop-sidebar { display: block; }
   .mobile-header,
   .mobile-expand-btn,
-  .mobile-footer,
-  .mobile-imprint-panel { display: none; }
+  .mobile-footer { display: none; }
 }
 @media (max-width: 699px) {
   .desktop-sidebar { display: none; }
