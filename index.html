@@ -1,35 +1,55 @@
 <!DOCTYPE html>
-<html lang="de"> 
+<html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Horizontal Image Scroll</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Start-Overlay: erscheint nur beim ersten Laden der Homepage -->
-  <div id="start-overlay">
-    <div class="overlay-logo-container">
-      <img src="img/Unbenannt-1 [Wiederhergestellt].png" alt="Logo">
+  <!-- DESKTOP SIDEBAR (ab 700px sichtbar) -->
+  <nav class="desktop-sidebar" id="desktop-sidebar">
+    <div class="logo-wrapper">
+      <a class="logo" href="index.html">JGVISUALS</a>
     </div>
-  </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Product</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <!-- Desktop Imprint-Link (wie in about.html) -->
+    <a href="#" class="imprint-link desktop-imprint-link" id="desktop-imprint-link">Imprint</a>
+    <!-- Desktop Sidebar-Schließ-Button -->
+    <button id="sidebar-close-btn" class="sidebar-close-btn">
+      <span class="x">&#10005;</span>
+    </button>
+    <!-- Desktop erweiterter Imprint-Inhalt -->
+    <div class="sidebar-expanded-imprint" id="sidebar-expanded-imprint">
+      <p>
+        <strong>Impressum</strong><br>
+        HolzART Briegel<br>
+        Thomas Briegel<br>
+        Ulrich-v.-Thürheim-Str. 16<br>
+        86647 Buttenwiesen<br><br>
+        <strong>Inhaber:</strong> Thomas Briegel<br><br>
+        <strong>Kontaktinformationen</strong><br>
+        Telefon: +49 1578 54 17 660<br>
+        E-Mail: info@holzartbriegel.de<br><br>
+        <strong>Umsatzsteuer-Nr.</strong> DE337741144<br><br>
+        <strong>Haftungsausschluss (Disclaimer)</strong><br>
+        <em>Haftung für Inhalte</em><br>
+        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+        <em>Haftung für Links</em><br>
+        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+        Quelle: eRecht24.de<br><br>
+        © Copyright HolzART Thomas Briegel 2024.
+      </p>
+    </div>
+  </nav>
 
-  <header>
-    <!-- Desktop Sidebar (wird ab 700px sichtbar) -->
-    <nav class="desktop-sidebar">
-      <div class="logo-wrapper">
-        <a class="logo" href="index.html">JGVISUALS</a>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="product.html">Product</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-      <a href="impressum.html" class="imprint-link">Imprint</a>
-    </nav>
-
-    <!-- Mobile Header -->
-    <div class="mobile-header">
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header" id="mobile-header">
+    <div class="header-top">
       <a class="logo" href="index.html">JGVISUALS</a>
       <a href="#" class="toggle_button" id="menu-toggle">
         <span class="bar"></span>
@@ -37,8 +57,37 @@
         <span class="bar"></span>
       </a>
     </div>
+    <!-- Mobile erweiterter Imprint-Inhalt (kein About-Bereich mehr) -->
+    <div class="mobile-expanded-content imprint-content" id="mobile-imprint-content">
+      <div class="mobile-imprint-close-btn" id="mobile-imprint-close-btn">
+        <span class="x">&#10005;</span>
+      </div>
+      <div class="mobile-imprint-text">
+        <p>
+          <strong>Impressum</strong><br>
+          HolzART Briegel<br>
+          Thomas Briegel<br>
+          Ulrich-v.-Thürheim-Str. 16<br>
+          86647 Buttenwiesen<br><br>
+          <strong>Inhaber:</strong> Thomas Briegel<br><br>
+          <strong>Kontaktinformationen</strong><br>
+          Telefon: +49 1578 54 17 660<br>
+          E-Mail: info@holzartbriegel.de<br><br>
+          <strong>Umsatzsteuer-Nr.</strong> DE337741144<br><br>
+          <strong>Haftungsausschluss (Disclaimer)</strong><br>
+          <em>Haftung für Inhalte</em><br>
+          Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+          <em>Haftung für Links</em><br>
+          Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+          Quelle: eRecht24.de<br><br>
+          © Copyright HolzART Thomas Briegel 2024.
+        </p>
+      </div>
+    </div>
+    <!-- Hinweis: Den zusätzlichen "Expand-Pfeil" (About) entfernen wir, da er hier nicht benötigt wird -->
   </header>
 
+  <!-- MOBILE MENÜ OVERLAY -->
   <div class="menu-overlay" id="menu">
     <a href="#" class="close_button" id="menu-close">&#10005;</a>
     <ul>
@@ -52,26 +101,27 @@
   <main>
     <section class="image-scroller">
       <div class="image-wrapper">
-        <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Image 1">
+        <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Image 1" />
       </div>
       <div class="image-wrapper">
-        <img src="img/_DSF4109-Verbessert-RR-Bearbeitet.jpg" alt="Image 2">
+        <img src="img/_DSF4109-Verbessert-RR-Bearbeitet.jpg" alt="Image 2" />
       </div>
       <div class="image-wrapper">
-        <img src="img/_DSF4122-Verbessert-RR-Bearbeitet.jpg" alt="Image 3">
+        <img src="img/_DSF4122-Verbessert-RR-Bearbeitet.jpg" alt="Image 3" />
       </div>
       <div class="image-wrapper">
-        <img src="img/_DSF4224-Verbessert-RR-Bearbeitet.jpg" alt="Image 4">
+        <img src="img/_DSF4224-Verbessert-RR-Bearbeitet.jpg" alt="Image 4" />
       </div>
       <div class="image-wrapper">
-        <img src="img/_DSF4318-Verbessert-RR-Bearbeitet.jpg" alt="Image 5">
+        <img src="img/_DSF4318-Verbessert-RR-Bearbeitet.jpg" alt="Image 5" />
       </div>
     </section>
   </main>
 
-  <!-- Footer wird nur in der mobilen Ansicht angezeigt -->
+  <!-- MOBILE FOOTER -->
   <footer class="mobile-footer">
-    <a href="impressum.html" class="imprint-link">Imprint</a>
+    <!-- Nur Imprint-Link für den mobilen Imprint -->
+    <a href="#" class="imprint-link" id="mobile-imprint-link">Imprint</a>
   </footer>
 
   <script src="script.js"></script>
