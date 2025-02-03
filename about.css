@@ -137,6 +137,8 @@ button,
   transition: opacity 0.5s ease;
   opacity: 0;
   display: none;
+  font-size: 15px;
+  text-align: justify;
 }
 .desktop-sidebar.expanded .sidebar-expanded-text {
   display: block;
@@ -149,9 +151,7 @@ button,
   display: block;
   opacity: 1;
 }
-.sidebar-expanded-imprint {
-  font-size: 12px;
-}
+
 .sidebar-expanded-text p,
 .sidebar-expanded-imprint p {
   text-align: justify;
@@ -289,7 +289,7 @@ button,
 .mobile-imprint-text {
   flex: 1 1 auto;
   overflow-y: auto;
-  margin: 0 20px 80px 20px; /* 20px Abstand links, rechts und unten */
+  margin: 0 25px 150px 25px; /* 20px Abstand links, rechts und unten */
   font-size: 12px;
 }
 
@@ -341,7 +341,7 @@ button,
   align-items: center;
   transform: translateX(100%);
   transition: transform 0.4s ease-in-out;
-  z-index: 120;
+  z-index: 1000;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
 }
 .menu-overlay.active {
@@ -366,6 +366,10 @@ button,
   font-size: 40px;
   cursor: pointer;
   color: var(--text-color);
+}
+
+.menu-overlay.active .imprint-link{
+  display: none;
 }
 
 /* --- MAIN – Statisches Hintergrundbild --- */
