@@ -31,6 +31,8 @@ html, body {
   height: 100%;
   font-family: 'Greycliff', Arial, sans-serif;
   overflow: hidden;
+   margin: 0;
+  padding: 0;
 }
 
 /* --- Allgemeine Hover-Regeln --- */
