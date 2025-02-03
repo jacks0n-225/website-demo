@@ -161,7 +161,7 @@ button,
   transition: opacity 0.5s ease;
   opacity: 0;
   display: none;
-  font-size: 12px;
+  font-size: 15px;
   text-align: justify;
 }
 
@@ -197,6 +197,7 @@ button,
   font-size: 30px;
   text-decoration: none;
   color: var(--text-color);
+  
 }
 
 .toggle_button {
@@ -262,7 +263,7 @@ button,
 .mobile-imprint-text {
   flex: 1 1 auto;
   overflow-y: auto;
-  margin: 0 20px 80px 20px; /* 20px Abstand links, rechts und unten */
+  margin: 0 25px 150px 25px; /* 20px Abstand links, rechts und unten */
   font-size: 12px;
 }
 
