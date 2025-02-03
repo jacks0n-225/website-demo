@@ -51,11 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Desktop Imprint-Link oder Sidebar nicht gefunden!");
   }
   
-  /* --- Mobile Erweiterung --- */
+  /* --- Mobile Erweiterung (About) --- */
   const mobileHeader = document.getElementById("mobile-header");
   const mobileExpandBtn = document.getElementById("mobile-expand-btn");
   if (mobileHeader && mobileExpandBtn) {
     mobileExpandBtn.addEventListener("click", function () {
+      // Beim Klick auf den Pfeil (Mobile Expand) wird der About-Modus getoggelt.
+      // Falls gerade der Imprint-Modus aktiv ist, wird dieser wieder deaktiviert.
+      mobileHeader.classList.remove("imprint-active");
       mobileHeader.classList.toggle("expanded");
       if (mobileHeader.classList.contains("expanded")) {
         mobileExpandBtn.innerHTML = "<span class='arrow'>&#10005;</span>";
@@ -67,32 +70,38 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Mobile Erweiterungselemente nicht gefunden!");
   }
   
-  /* --- Mobile Close-Button im erweiterten Bereich --- */
+  /* --- Mobile Close-Button im About-Bereich --- */
   const mobileCloseBtn = document.getElementById("mobile-close-btn");
   if (mobileCloseBtn && mobileHeader) {
     mobileCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded");
+      mobileHeader.classList.remove("expanded", "imprint-active");
       mobileExpandBtn.innerHTML = "<span class='arrow'>&#8595;</span>";
     });
   } else {
-    console.error("❌ Mobile Close-Button im Erweiterungsbereich nicht gefunden!");
+    console.error("❌ Mobile Close-Button im About-Bereich nicht gefunden!");
   }
   
-  /* --- Mobile Imprint Panel --- */
+  /* --- Mobile Imprint Link (Footer) --- */
   const mobileImprintLink = document.getElementById("mobile-imprint-link");
-  const mobileImprintPanel = document.getElementById("mobile-imprint-panel");
-  const mobileImprintCloseBtn = document.getElementById("mobile-imprint-close-btn");
-  if (mobileImprintLink && mobileImprintPanel) {
+  if (mobileImprintLink && mobileHeader) {
     mobileImprintLink.addEventListener("click", function (event) {
       event.preventDefault();
-      mobileImprintPanel.classList.add("expanded");
+      // Beim Klick auf den Imprint-Link im Footer:
+      // – mobileHeader erweitern (falls noch nicht geschehen)
+      // – Klasse "imprint-active" hinzufügen, damit der Imprint-Content angezeigt wird
+      mobileHeader.classList.add("expanded", "imprint-active");
+      mobileExpandBtn.innerHTML = "<span class='arrow'>&#10005;</span>";
     });
   } else {
-    console.error("❌ Mobile Imprint-Link oder -Panel nicht gefunden!");
+    console.error("❌ Mobile Imprint-Link nicht gefunden!");
   }
-  if (mobileImprintCloseBtn && mobileImprintPanel) {
+  
+  /* --- Mobile Close-Button im Imprint-Bereich --- */
+  const mobileImprintCloseBtn = document.getElementById("mobile-imprint-close-btn");
+  if (mobileImprintCloseBtn && mobileHeader) {
     mobileImprintCloseBtn.addEventListener("click", function () {
-      mobileImprintPanel.classList.remove("expanded");
+      mobileHeader.classList.remove("expanded", "imprint-active");
+      mobileExpandBtn.innerHTML = "<span class='arrow'>&#8595;</span>";
     });
   } else {
     console.error("❌ Mobile Imprint Close-Button nicht gefunden!");
