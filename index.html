@@ -1,68 +1,32 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Horizontal Image Scroll</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <!-- DESKTOP SIDEBAR (ab 700px sichtbar) -->
-  <nav class="desktop-sidebar" id="desktop-sidebar">
-    <div class="logo-wrapper">
-      <a class="logo" href="index.html">JGVISUALS</a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="product.html">Product</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <!-- Desktop Imprint-Link (wie in about.html) -->
-    <a href="#" class="imprint-link desktop-imprint-link" id="desktop-imprint-link">Imprint</a>
-    <!-- Desktop Sidebar-Schließ-Button -->
-    <button id="sidebar-close-btn" class="sidebar-close-btn">
-      <span class="x">&#10005;</span>
-    </button>
-    <!-- Desktop erweiterter Imprint-Inhalt -->
-    <div class="sidebar-expanded-imprint" id="sidebar-expanded-imprint">
-      <p>
-        <strong>Impressum</strong><br>
-        HolzART Briegel<br>
-        Thomas Briegel<br>
-        Ulrich-v.-Thürheim-Str. 16<br>
-        86647 Buttenwiesen<br><br>
-        <strong>Inhaber:</strong> Thomas Briegel<br><br>
-        <strong>Kontaktinformationen</strong><br>
-        Telefon: +49 1578 54 17 660<br>
-        E-Mail: info@holzartbriegel.de<br><br>
-        <strong>Umsatzsteuer-Nr.</strong> DE337741144<br><br>
-        <strong>Haftungsausschluss (Disclaimer)</strong><br>
-        <em>Haftung für Inhalte</em><br>
-        Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
-        <em>Haftung für Links</em><br>
-        Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
-        Quelle: eRecht24.de<br><br>
-        © Copyright HolzART Thomas Briegel 2024.
-      </p>
-    </div>
-  </nav>
-
-  <!-- MOBILE HEADER -->
-  <header class="mobile-header" id="mobile-header">
-    <div class="header-top">
-      <a class="logo" href="index.html">JGVISUALS</a>
-      <a href="#" class="toggle_button" id="menu-toggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </a>
-    </div>
-    <!-- Mobile erweiterter Imprint-Inhalt (kein About-Bereich mehr) -->
-    <div class="mobile-expanded-content imprint-content" id="mobile-imprint-content">
-      <div class="mobile-imprint-close-btn" id="mobile-imprint-close-btn">
-        <span class="x">&#10005;</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horizontal Image Scroll</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- DESKTOP SIDEBAR (ab 700px sichtbar) -->
+    <nav class="desktop-sidebar" id="desktop-sidebar">
+      <div class="logo-wrapper">
+        <a class="logo" href="index.html">JGVISUALS</a>
       </div>
-      <div class="mobile-imprint-text">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <!-- Desktop Projects-Link angepasst -->
+        <li><a href="#" id="desktop-projects-link">Projects</a></li>
+        <li><a href="#" id="desktop-about-link">About</a></li>
+        <li><a href="#" id="desktop-contact-link">Contact</a></li>
+      </ul>
+      <!-- Desktop Imprint-Link -->
+      <a href="#" class="imprint-link desktop-imprint-link" id="desktop-imprint-link">Imprint</a>
+      <!-- Desktop Sidebar-Schließ-Button -->
+      <button id="sidebar-close-btn" class="sidebar-close-btn">
+        <span class="x">&#10005;</span>
+      </button>
+      <!-- Desktop erweiterte Inhaltsbereiche -->
+      <div class="sidebar-expanded-content imprint-content" id="sidebar-expanded-imprint">
         <p>
           <strong>Impressum</strong><br>
           HolzART Briegel<br>
@@ -83,47 +47,185 @@
           © Copyright HolzART Thomas Briegel 2024.
         </p>
       </div>
+      <div class="sidebar-expanded-content about-content" id="sidebar-expanded-about">
+        <p>
+          I'm Jakob Giggenbach, a dedicated photography student with a focus on Foto-Design at the University of Applied Sciences in Munich. My creative heart beats for the intersection of Fashion, Product Photography, and Film. I seek to weave narratives into every shot, blending the elegance of fashion with the precision of product aesthetics. My films extend these stories into dynamic sequences, filled with emotion and expression. The addition of CGI allows me to construct imaginative realities that enhance and elevate my visual storytelling. For opportunities to collaborate or to see more of my work, please reach out.
+        </p>
+      </div>
+      <div class="sidebar-expanded-content contact-content" id="sidebar-expanded-contact">
+        <p>
+          <strong>Get in Touch</strong><br><br>
+          Jakob Giggenbach Visuals<br><br>
+          E-Mail: <a href="mailto:jakob.giggenbach@jgvisuals.de" style="color: var(--text-color);">jakob.giggenbach@jgvisuals.de</a><br><br>
+          Tel: 0172-5315385
+        </p>
+      </div>
+      <!-- Neuer Desktop Projects-Bereich -->
+      <div class="sidebar-expanded-content projects-content" id="sidebar-expanded-projects">
+        <div class="projects-grid">
+          <a href="project1.html" class="project-item">
+            <img src="img/DSCF7739-Bearbeitet.jpg" alt="Titel 1" />
+            <div class="project-title">Titel 1</div>
+          </a>
+          <a href="project2.html" class="project-item">
+            <img src="img/Unbenannt-2.jpg" alt="Titel 2" />
+            <div class="project-title">Titel 2</div>
+          </a>
+          <a href="project3.html" class="project-item">
+            <img src="img/Zeichenfläche 2.jpg" alt="Titel 3" />
+            <div class="project-title">Titel 3</div>
+          </a>
+          <a href="project4.html" class="project-item">
+            <img src="img/Modefotografie_Giggenbach-26.jpg" alt="Titel 4" />
+            <div class="project-title">Titel 4</div>
+          </a>
+          <a href="project5.html" class="project-item">
+            <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Titel 5" />
+            <div class="project-title">Titel 5</div>
+          </a>
+          <a href="project6.html" class="project-item">
+            <img src="img/Japan-2.jpg" alt="Titel 6" />
+            <div class="project-title">Titel 6</div>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header" id="mobile-header">
+      <div class="header-top">
+        <a class="logo" href="index.html">JGVISUALS</a>
+        <a href="#" class="toggle_button" id="menu-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+      </div>
+      <!-- Mobile erweiterte Inhaltsbereiche -->
+      <!-- Imprint -->
+      <div class="mobile-expanded-content imprint-content" id="mobile-imprint-content">
+        <div class="mobile-close-btn" id="mobile-imprint-close-btn">
+          <span class="x">&#10005;</span>
+        </div>
+        <div class="mobile-content-text">
+          <p>
+            <strong>Impressum</strong><br>
+            HolzART Briegel<br>
+            Thomas Briegel<br>
+            Ulrich-v.-Thürheim-Str. 16<br>
+            86647 Buttenwiesen<br><br>
+            <strong>Inhaber:</strong> Thomas Briegel<br><br>
+            <strong>Kontaktinformationen</strong><br>
+            Telefon: +49 1578 54 17 660<br>
+            E-Mail: info@holzartbriegel.de<br><br>
+            <strong>Umsatzsteuer-Nr.</strong> DE337741144<br><br>
+            <strong>Haftungsausschluss (Disclaimer)</strong><br>
+            <em>Haftung für Inhalte</em><br>
+            Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+            <em>Haftung für Links</em><br>
+            Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.<br><br>
+            Quelle: eRecht24.de<br><br>
+            © Copyright HolzART Thomas Briegel 2024.
+          </p>
+        </div>
+      </div>
+      <!-- About -->
+      <div class="mobile-expanded-content about-content" id="mobile-about-content">
+        <div class="mobile-close-btn" id="mobile-about-close-btn">
+          <span class="x">&#10005;</span>
+        </div>
+        <div class="mobile-content-text">
+          <p>
+            I'm Jakob Giggenbach, a dedicated photography student with a focus on Foto-Design at the University of Applied Sciences in Munich. My creative heart beats for the intersection of Fashion, Product Photography, and Film. I seek to weave narratives into every shot, blending the elegance of fashion with the precision of product aesthetics. My films extend these stories into dynamic sequences, filled with emotion and expression. The addition of CGI allows me to construct imaginative realities that enhance and elevate my visual storytelling. For opportunities to collaborate or to see more of my work, please reach out.
+          </p>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div class="mobile-expanded-content contact-content" id="mobile-contact-content">
+        <div class="mobile-close-btn" id="mobile-contact-close-btn">
+          <span class="x">&#10005;</span>
+        </div>
+        <div class="mobile-content-text">
+          <p>
+            <strong>Get in Touch</strong><br><br>
+            Jakob Giggenbach Visuals<br><br>
+            E-Mail: <a href="mailto:jakob.giggenbach@jgvisuals.de" style="color: var(--text-color);">jakob.giggenbach@jgvisuals.de</a><br><br>
+            Tel: 0172-5315385
+          </p>
+        </div>
+      </div>
+      <!-- Neuer Mobile Projects-Bereich -->
+      <div class="mobile-expanded-content projects-content" id="mobile-projects-content">
+        <div class="mobile-close-btn" id="mobile-projects-close-btn">
+          <span class="x">&#10005;</span>
+        </div>
+        <div class="projects-grid">
+          <a href="project1.html" class="project-item">
+            <img src="img/DSCF7739-Bearbeitet.jpg" alt="Titel 1" />
+            <div class="project-title">Titel 1</div>
+          </a>
+          <a href="project2.html" class="project-item">
+            <img src="img/Unbenannt-2.jpg" alt="Titel 2" />
+            <div class="project-title">Titel 2</div>
+          </a>
+          <a href="project3.html" class="project-item">
+            <img src="img/Zeichenfläche 2.jpg" alt="Titel 3" />
+            <div class="project-title">Titel 3</div>
+          </a>
+          <a href="project4.html" class="project-item">
+            <img src="img/Modefotografie_Giggenbach-26.jpg" alt="Titel 4" />
+            <div class="project-title">Titel 4</div>
+          </a>
+          <a href="project5.html" class="project-item">
+            <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Titel 5" />
+            <div class="project-title">Titel 5</div>
+          </a>
+          <a href="project6.html" class="project-item">
+            <img src="img/Japan-2.jpg" alt="Titel 6" />
+            <div class="project-title">Titel 6</div>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBILE MENÜ OVERLAY -->
+    <div class="menu-overlay" id="menu">
+      <a href="#" class="close_button" id="menu-close">&#10005;</a>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <!-- Mobile Projects-Link angepasst -->
+        <li><a href="#" id="mobile-projects-link-menu">PROJECTS</a></li>
+        <li><a href="#" id="mobile-about-link-menu">ABOUT</a></li>
+      </ul>
     </div>
-    <!-- Hinweis: Den zusätzlichen "Expand-Pfeil" (About) entfernen wir, da er hier nicht benötigt wird -->
-  </header>
 
-  <!-- MOBILE MENÜ OVERLAY -->
-  <div class="menu-overlay" id="menu">
-    <a href="#" class="close_button" id="menu-close">&#10005;</a>
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="product.html">PRODUCT</a></li>
-      <li><a href="product.html">3D</a></li>
-      <li><a href="about.html">ABOUT</a></li>
-    </ul>
-  </div>
+    <main>
+      <section class="image-scroller">
+        <div class="image-wrapper">
+          <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Image 1" />
+        </div>
+        <div class="image-wrapper">
+          <img src="img/_DSF4109-Verbessert-RR-Bearbeitet.jpg" alt="Image 2" />
+        </div>
+        <div class="image-wrapper">
+          <img src="img/_DSF4122-Verbessert-RR-Bearbeitet.jpg" alt="Image 3" />
+        </div>
+        <div class="image-wrapper">
+          <img src="img/_DSF4224-Verbessert-RR-Bearbeitet.jpg" alt="Image 4" />
+        </div>
+        <div class="image-wrapper">
+          <img src="img/_DSF4318-Verbessert-RR-Bearbeitet.jpg" alt="Image 5" />
+        </div>
+      </section>
+    </main>
 
-  <main>
-    <section class="image-scroller">
-      <div class="image-wrapper">
-        <img src="img/_DSF4081-Verbessert-RR-Bearbeitet.jpg" alt="Image 1" />
-      </div>
-      <div class="image-wrapper">
-        <img src="img/_DSF4109-Verbessert-RR-Bearbeitet.jpg" alt="Image 2" />
-      </div>
-      <div class="image-wrapper">
-        <img src="img/_DSF4122-Verbessert-RR-Bearbeitet.jpg" alt="Image 3" />
-      </div>
-      <div class="image-wrapper">
-        <img src="img/_DSF4224-Verbessert-RR-Bearbeitet.jpg" alt="Image 4" />
-      </div>
-      <div class="image-wrapper">
-        <img src="img/_DSF4318-Verbessert-RR-Bearbeitet.jpg" alt="Image 5" />
-      </div>
-    </section>
-  </main>
+    <!-- MOBILE FOOTER -->
+    <footer class="mobile-footer">
+      <a href="#" class="footer-link" id="mobile-about-link">About</a>
+      <a href="#" class="footer-link" id="mobile-contact-link">Contact</a>
+      <a href="#" class="imprint-link" id="mobile-imprint-link">Imprint</a>
+    </footer>
 
-  <!-- MOBILE FOOTER -->
-  <footer class="mobile-footer">
-    <!-- Nur Imprint-Link für den mobilen Imprint -->
-    <a href="#" class="imprint-link" id="mobile-imprint-link">Imprint</a>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
