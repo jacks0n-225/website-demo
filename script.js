@@ -30,51 +30,154 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ----------------------
-     DESKTOP: Imprint-Funktionalität
+     DESKTOP: Erweitern der Sidebar
   ----------------------- */
   const desktopSidebar = document.getElementById("desktop-sidebar");
+
+  // Imprint
   const desktopImprintLink = document.getElementById("desktop-imprint-link");
   if (desktopImprintLink && desktopSidebar) {
     desktopImprintLink.addEventListener("click", function (event) {
       event.preventDefault();
-      // Fügt Klassen hinzu, um die Sidebar zu erweitern und den Imprint anzuzeigen
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
       desktopSidebar.classList.add("expanded", "imprint-active");
     });
   } else {
     console.error("❌ Desktop Imprint-Link oder Sidebar nicht gefunden!");
   }
 
+  // About
+  const desktopAboutLink = document.getElementById("desktop-about-link");
+  if (desktopAboutLink && desktopSidebar) {
+    desktopAboutLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.add("expanded", "about-active");
+    });
+  } else {
+    console.error("❌ Desktop About-Link nicht gefunden!");
+  }
+
+  // Contact
+  const desktopContactLink = document.getElementById("desktop-contact-link");
+  if (desktopContactLink && desktopSidebar) {
+    desktopContactLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.add("expanded", "contact-active");
+    });
+  } else {
+    console.error("❌ Desktop Contact-Link nicht gefunden!");
+  }
+
+  // Projects (Desktop)
+  const desktopProjectsLink = document.getElementById("desktop-projects-link");
+  if (desktopProjectsLink && desktopSidebar) {
+    desktopProjectsLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.add("expanded", "projects-active");
+    });
+  } else {
+    console.error("❌ Desktop Projects-Link nicht gefunden!");
+  }
+
   const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
   if (sidebarCloseBtn && desktopSidebar) {
     sidebarCloseBtn.addEventListener("click", function () {
-      desktopSidebar.classList.remove("expanded", "imprint-active");
+      desktopSidebar.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
     });
   } else {
     console.error("❌ Desktop Sidebar-Schließ-Button nicht gefunden!");
   }
 
   /* ----------------------
-     MOBILE: Imprint-Funktionalität
+     MOBILE: Erweitern des Headers
   ----------------------- */
   const mobileHeader = document.getElementById("mobile-header");
+
+  // Imprint
   const mobileImprintLink = document.getElementById("mobile-imprint-link");
   const mobileImprintCloseBtn = document.getElementById("mobile-imprint-close-btn");
-
   if (mobileImprintLink && mobileHeader) {
     mobileImprintLink.addEventListener("click", function (event) {
       event.preventDefault();
-      // Erweitert den mobilen Header und zeigt den Imprint-Inhalt
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
       mobileHeader.classList.add("expanded", "imprint-active");
     });
   } else {
     console.error("❌ Mobile Imprint-Link nicht gefunden!");
   }
-
   if (mobileImprintCloseBtn && mobileHeader) {
     mobileImprintCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active");
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
     });
   } else {
     console.error("❌ Mobile Imprint-Schließ-Button nicht gefunden!");
+  }
+
+  // About
+  const mobileAboutLink = document.getElementById("mobile-about-link");
+  const mobileAboutCloseBtn = document.getElementById("mobile-about-close-btn");
+  if (mobileAboutLink && mobileHeader) {
+    mobileAboutLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.add("expanded", "about-active");
+    });
+  } else {
+    console.error("❌ Mobile About-Link nicht gefunden!");
+  }
+  if (mobileAboutCloseBtn && mobileHeader) {
+    mobileAboutCloseBtn.addEventListener("click", function () {
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+    });
+  } else {
+    console.error("❌ Mobile About-Schließ-Button nicht gefunden!");
+  }
+
+  // Contact
+  const mobileContactLink = document.getElementById("mobile-contact-link");
+  const mobileContactCloseBtn = document.getElementById("mobile-contact-close-btn");
+  if (mobileContactLink && mobileHeader) {
+    mobileContactLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.add("expanded", "contact-active");
+    });
+  } else {
+    console.error("❌ Mobile Contact-Link nicht gefunden!");
+  }
+  if (mobileContactCloseBtn && mobileHeader) {
+    mobileContactCloseBtn.addEventListener("click", function () {
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+    });
+  } else {
+    console.error("❌ Mobile Contact-Schließ-Button nicht gefunden!");
+  }
+
+  // Projects (Mobile)
+  // In der mobilen Overlay-Liste
+  const mobileProjectsLinkMenu = document.getElementById("mobile-projects-link-menu");
+  if (mobileProjectsLinkMenu && mobileHeader) {
+    mobileProjectsLinkMenu.addEventListener("click", function (event) {
+      event.preventDefault();
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.add("expanded", "projects-active");
+      // Falls das Menü geöffnet war, wieder schließen
+      if (menu.classList.contains("active")) {
+        menu.classList.remove("active");
+      }
+    });
+  } else {
+    console.error("❌ Mobile Projects-Link im Menü nicht gefunden!");
+  }
+  const mobileProjectsCloseBtn = document.getElementById("mobile-projects-close-btn");
+  if (mobileProjectsCloseBtn && mobileHeader) {
+    mobileProjectsCloseBtn.addEventListener("click", function () {
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+    });
+  } else {
+    console.error("❌ Mobile Projects-Schließ-Button nicht gefunden!");
   }
 });
