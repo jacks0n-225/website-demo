@@ -220,7 +220,7 @@ button,
 .mobile-header .logo {
   font-size: 30px;
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
 }
 
 .toggle_button {
@@ -269,7 +269,7 @@ button,
 .mobile-content-text p {
   margin: 0;
   font-size: 12px;
-  max-height: 70vh;
+  max-height: 70svh;
   overflow-y: auto;
 }
 
@@ -290,7 +290,7 @@ button,
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100svh;
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -331,7 +331,7 @@ button,
 /* Projekte-Grid (wird bereits in beiden Bereichen genutzt) */
 .projects-grid {
   width: calc(100vw - 20vw);
-  height: calc(100vh - 40vh);
+  height: calc(100svh - 40vh);
   display: grid;
   gap: 20px;
   grid-auto-rows: 1fr;
