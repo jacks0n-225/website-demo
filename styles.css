@@ -31,7 +31,7 @@ html, body {
   height: 100%;
   font-family: 'Greycliff', Arial, sans-serif;
   overflow: hidden;
-   margin: 0;
+  margin: 0;
   padding: 0;
 }
 
@@ -44,7 +44,8 @@ button,
 .mobile-footer .imprint-link,
 .mobile-close-btn span.x,
 .close_button,
-.menu-overlay a {
+.menu-overlay a,
+.footer-link {
   transition: color 0.4s;
 }
 
@@ -57,17 +58,20 @@ button,
 
 /* Mobile-Hover */
 .header-top .logo:hover,
-.mobile-footer .imprint-link:hover {
+.mobile-footer .imprint-link:hover,
+.footer-link:hover {
   color: darkgrey;
 }
 .toggle_button:hover .bar {
   background-color: darkgrey;
 }
 
-/* DESKTOP SIDEBAR */
+/* --------------------
+   DESKTOP SIDEBAR
+-------------------- */
 .desktop-sidebar {
   position: fixed;
-  top: 42px; /* Standard: 42px – später per Media Query angepasst */
+  top: 42px; /* später per Media Query angepasst */
   left: 0;
   width: 30vw;
   height: 100vh;
@@ -126,7 +130,35 @@ button,
   color: var(--text-color);
 }
 
-/* IMPRINT-BEREICH DESKTOP */
+/* --------------------
+   IMPRINT / ABOUT / CONTACT / PROJECTS-BEREICH DESKTOP
+-------------------- */
+.sidebar-expanded-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-color);
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  display: none;
+  font-size: 15px;
+  text-align: justify;
+  padding: 20px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.desktop-sidebar.expanded.imprint-active .imprint-content,
+.desktop-sidebar.expanded.about-active .about-content,
+.desktop-sidebar.expanded.contact-active .contact-content,
+.desktop-sidebar.expanded.projects-active .projects-content {
+  display: block;
+  opacity: 1;
+}
+
+/* Desktop Imprint-Link (unten) */
 .desktop-imprint-link {
   font-size: 18px;
   position: absolute;
@@ -154,26 +186,9 @@ button,
   display: block;
 }
 
-.sidebar-expanded-imprint {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--text-color);
-  transition: opacity 0.5s ease;
-  opacity: 0;
-  display: none;
-  font-size: 15px;
-  text-align: justify;
-}
-
-.desktop-sidebar.expanded.imprint-active .sidebar-expanded-imprint {
-  display: block;
-  opacity: 1;
-}
-
-
-/* MOBILE HEADER & IMPRINT */
+/* --------------------
+   MOBILE HEADER & INHALT
+-------------------- */
 .mobile-header {
   position: fixed;
   top: 0;
@@ -184,7 +199,14 @@ button,
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
+  /* Normalerweise Box-Shadow – diese Regel wird im erweiterten Zustand überschrieben */
   box-shadow: 1px 0 6px rgba(0,0,0,0.5);
+  transition: box-shadow 0.5s ease;
+}
+
+.mobile-header.expanded {
+  /* Beim Erweitern soll kein Schatten angezeigt werden */
+  box-shadow: none;
 }
 
 .header-top {
@@ -199,7 +221,6 @@ button,
   font-size: 30px;
   text-decoration: none;
   color: var(--text-color);
-  
 }
 
 .toggle_button {
@@ -218,60 +239,54 @@ button,
   border-radius: 100px;
 }
 
-/* Mobile erweiterter Imprint-Inhalt */
+/* Mobile erweiterte Inhaltsbereiche */
+/* Ausgangszustand: Höhe 0, unsichtbar */
 .mobile-expanded-content {
   width: 100%;
-  max-height: 0;
+  height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  transition: height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
   padding: 0 20px;
   color: var(--text-color);
+  background: rgba(0,0,0,0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Entferne hier den Box-Shadow, falls er einen sichtbaren Trenner erzeugt */
+  box-shadow: none;
+  z-index: 10;
 }
 
-.mobile-header.expanded .mobile-expanded-content {
-  max-height: calc(100vh - var(--navbar-height));
+/* Wenn der mobile Header erweitert ist, nehmen die Inhalte die volle verfügbare Höhe ein */
+.mobile-header.expanded.imprint-active .imprint-content,
+.mobile-header.expanded.about-active .about-content,
+.mobile-header.expanded.contact-active .contact-content,
+.mobile-header.expanded.projects-active .projects-content {
+  height: calc(100vh - var(--navbar-height));
   opacity: 1;
   padding: 20px 40px;
 }
-.mobile-expanded-content p {
-  margin-top: 20px;
-  text-align: justify;
+
+/* Innerer Content */
+.mobile-content-text p {
+  margin: 0;
+  font-size: 12px;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
-.mobile-header.expanded .imprint-content {
-  display: none;
-}
-.mobile-header.expanded.imprint-active .about-content {
-  display: none;
-}
-
-.mobile-imprint-close-btn {
-  flex: 0 0 auto;
+/* Mobile Schließ-Button */
+.mobile-close-btn {
   text-align: center;
   font-size: 1.5em;
   cursor: pointer;
   color: var(--text-color);
   padding: 20px;
 }
-.mobile-header.expanded.imprint-active .imprint-content {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - var(--navbar-height));
-  padding: 0; /* Standard-Padding überschreiben */
-}
 
-/* Scrollbarer Textbereich im Imprint-Bereich mit festem Abstand zu allen Bildschirmrändern */
-.mobile-imprint-text {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  margin: 0 25px 150px 25px; /* 20px Abstand links, rechts und unten */
-  font-size: 12px;
-}
-
-/* Da der "About Expand-Pfeil" nicht benötigt wird, entfernen wir dessen Styles */
-
-/* MENU OVERLAY (MOBILE) */
+/* --------------------
+   MENU OVERLAY (MOBILE)
+-------------------- */
 .menu-overlay {
   position: fixed;
   top: 0;
@@ -319,7 +334,9 @@ button,
   color: white;
 }
 
-/* HORIZONTALES SCROLLING */
+/* --------------------
+   HORIZONTALES SCROLLING
+-------------------- */
 .image-scroller {
   width: 100vw;
   height: 100vh;
@@ -343,7 +360,9 @@ button,
   object-fit: cover;
 }
 
-/* MOBILE FOOTER */
+/* --------------------
+   MOBILE FOOTER
+-------------------- */
 .mobile-footer {
   position: fixed;
   bottom: 0;
@@ -354,29 +373,88 @@ button,
   align-items: center;
   padding: 10px;
   text-align: center;
+  gap: 20px;
 }
 
-.mobile-footer .imprint-link {
+.mobile-footer a {
   font-size: 18px;
   text-decoration: none;
   color: var(--text-color);
   cursor: pointer;
 }
 
-/* SCROLLBAR AUSBLENDEN */
+/* --------------------
+   PROJEKTE GRID & HOVER-EFFEKTE
+-------------------- */
+/* Standard: Desktop Projects Grid (3 Spalten, 2 Zeilen) */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px; /* Hier kannst du den Abstand anpassen */
+}
+
+/* Änderung: Mobile Ansicht – Grid mit 2 Spalten und 3 Zeilen */
+@media (max-width: 699px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 30px;
+  }
+}
+
+.project-item {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+.project-item img {
+  width: 100%;
+  /* Änderung: Bilder quadratisch machen */
+  aspect-ratio: 1; /* sorgt dafür, dass das Bild immer quadratisch ist */
+  object-fit: cover;
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 1.5);
+  filter: grayscale(100%);
+}
+  
+.project-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text-color);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 5px 0;
+}
+
+.project-item img:hover{
+  filter: grayscale(0%);
+} 
+
+
+.project-item:hover .project-title {
+  opacity: 1;
+}
+
+/* --------------------
+   SCROLLBAR AUSBLENDEN
+-------------------- */
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-/* --- MEDIA QUERIES --- */
+/* --------------------
+   MEDIA QUERIES
+-------------------- */
 @media (min-width: 700px) {
   .desktop-sidebar { display: block; }
   .mobile-header,
-  .mobile-expand-btn,
   .mobile-footer { display: none; }
 }
 @media (max-width: 699px) {
   .desktop-sidebar { display: none; }
 }
-
