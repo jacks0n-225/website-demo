@@ -150,11 +150,18 @@ button,
   max-height: 80vh;
   overflow-y: auto;
 }
+.sidebar-expanded-content.hello-content {
+  text-align: center;
+}
+.desktop-sidebar.expanded.hello-active .sidebar-close-btn {
+  display: none;
+}
 
 .desktop-sidebar.expanded.imprint-active .imprint-content,
 .desktop-sidebar.expanded.about-active .about-content,
 .desktop-sidebar.expanded.contact-active .contact-content,
-.desktop-sidebar.expanded.projects-active .projects-content {
+.desktop-sidebar.expanded.projects-active .projects-content,
+.desktop-sidebar.expanded.hello-active .hello-content {
   display: block;
   opacity: 1;
 }
@@ -185,6 +192,15 @@ button,
 
 .desktop-sidebar.expanded .sidebar-close-btn {
   display: block;
+}
+
+/* Spezieller Stil für den HELLO-Schließ-Button in der Desktop Sidebar */
+.hello-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 4em; /* Extrem große Schrift */
+  cursor: pointer;
 }
 
 /* --------------------
@@ -258,7 +274,8 @@ button,
 .mobile-header.expanded.imprint-active .imprint-content,
 .mobile-header.expanded.about-active .about-content,
 .mobile-header.expanded.contact-active .contact-content,
-.mobile-header.expanded.projects-active .projects-content {
+.mobile-header.expanded.projects-active .projects-content,
+.mobile-header.expanded.hello-active .hello-content {
   height: calc(100svh - var(--navbar-height));
   opacity: 1;
   padding: 0 20px;
@@ -281,6 +298,21 @@ button,
   cursor: pointer;
   color: var(--text-color);
   padding: 20px;
+}
+
+/* Spezieller Stil für den HELLO-Button im Mobile-Bereich */
+.mobile-hello-btn {
+  text-align: center;
+  font-size: 3em;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 20px;
+}
+
+.mobile-expanded-content.hello-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* --------------------
@@ -488,6 +520,14 @@ button[type="submit"]:hover {
   text-decoration: none;
   color: var(--text-color);
   cursor: pointer;
+}
+
+.static-image{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* --------------------
