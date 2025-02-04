@@ -262,6 +262,7 @@ button,
   height: calc(100dvh - var(--navbar-height));
   opacity: 1;
   padding: 20px 40px;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Innerer Content */
@@ -341,10 +342,10 @@ button,
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
     margin: 20vh 5vw;
-    width: calc(100vw - 10vw);
+    width: calc(100vw - 20vw);
     height: calc(100dvh - 30vh);
     display: grid;
-    gap: 20px;
+    gap: 2vh;
     grid-auto-rows: 1fr;
   }
 }
