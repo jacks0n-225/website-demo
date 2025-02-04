@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ----------------------
-     DESKTOP: Erweitern der Sidebar
+     DESKTOP: Erweitern der Sidebar für die unterschiedlichen Bereiche
   ----------------------- */
   const desktopSidebar = document.getElementById("desktop-sidebar");
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (desktopImprintLink && desktopSidebar) {
     desktopImprintLink.addEventListener("click", function (event) {
       event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       desktopSidebar.classList.add("expanded", "imprint-active");
     });
   } else {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (desktopAboutLink && desktopSidebar) {
     desktopAboutLink.addEventListener("click", function (event) {
       event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       desktopSidebar.classList.add("expanded", "about-active");
     });
   } else {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (desktopContactLink && desktopSidebar) {
     desktopContactLink.addEventListener("click", function (event) {
       event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       desktopSidebar.classList.add("expanded", "contact-active");
     });
   } else {
@@ -75,24 +75,37 @@ document.addEventListener("DOMContentLoaded", function () {
   if (desktopProjectsLink && desktopSidebar) {
     desktopProjectsLink.addEventListener("click", function (event) {
       event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       desktopSidebar.classList.add("expanded", "projects-active");
     });
   } else {
     console.error("❌ Desktop Projects-Link nicht gefunden!");
   }
 
+  // HELLO – Diese Seite soll beim Laden als erstes angezeigt werden
+  const desktopHelloCloseBtn = document.getElementById("hello-close-btn");
+  if (desktopHelloCloseBtn && desktopSidebar) {
+    // Beim Laden automatisch den HELLO-Bereich anzeigen
+    desktopSidebar.classList.add("expanded", "hello-active");
+    desktopHelloCloseBtn.addEventListener("click", function () {
+      desktopSidebar.classList.remove("expanded", "hello-active");
+    });
+  } else {
+    console.error("❌ Desktop Hello-Schließ-Button nicht gefunden!");
+  }
+
+  // Sidebar-Schließ-Button (für die anderen Bereiche)
   const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
   if (sidebarCloseBtn && desktopSidebar) {
     sidebarCloseBtn.addEventListener("click", function () {
-      desktopSidebar.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+      desktopSidebar.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
     });
   } else {
     console.error("❌ Desktop Sidebar-Schließ-Button nicht gefunden!");
   }
 
   /* ----------------------
-     MOBILE: Erweitern des Headers
+     MOBILE: Erweitern des Headers für die unterschiedlichen Bereiche
   ----------------------- */
   const mobileHeader = document.getElementById("mobile-header");
 
@@ -102,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mobileImprintLink && mobileHeader) {
     mobileImprintLink.addEventListener("click", function (event) {
       event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       mobileHeader.classList.add("expanded", "imprint-active");
     });
   } else {
@@ -110,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (mobileImprintCloseBtn && mobileHeader) {
     mobileImprintCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
     });
   } else {
     console.error("❌ Mobile Imprint-Schließ-Button nicht gefunden!");
@@ -122,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mobileAboutLink && mobileHeader) {
     mobileAboutLink.addEventListener("click", function (event) {
       event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       mobileHeader.classList.add("expanded", "about-active");
     });
   } else {
@@ -130,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (mobileAboutCloseBtn && mobileHeader) {
     mobileAboutCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
     });
   } else {
     console.error("❌ Mobile About-Schließ-Button nicht gefunden!");
@@ -142,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mobileContactLink && mobileHeader) {
     mobileContactLink.addEventListener("click", function (event) {
       event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
       mobileHeader.classList.add("expanded", "contact-active");
     });
   } else {
@@ -150,10 +163,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (mobileContactCloseBtn && mobileHeader) {
     mobileContactCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
     });
   } else {
     console.error("❌ Mobile Contact-Schließ-Button nicht gefunden!");
+  }
+
+  // HELLO – Auch im Mobile-Bereich soll der HELLO-Inhalt initial angezeigt werden
+  const mobileHelloCloseBtn = document.getElementById("mobile-hello-close-btn");
+  if (mobileHelloCloseBtn && mobileHeader) {
+    // Beim Laden den HELLO-Bereich anzeigen
+    mobileHeader.classList.add("expanded", "hello-active");
+    mobileHelloCloseBtn.addEventListener("click", function () {
+      mobileHeader.classList.remove("expanded", "hello-active");
+    });
+  } else {
+    console.error("❌ Mobile Hello-Schließ-Button nicht gefunden!");
   }
 
   // Hinweis: Da wir das mobile Menü-Overlay jetzt direkt mit dem Projektgrid befüllen,
