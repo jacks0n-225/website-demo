@@ -156,28 +156,30 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Mobile Contact-Schließ-Button nicht gefunden!");
   }
 
-  // Projects (Mobile)
-  // In der mobilen Overlay-Liste
-  const mobileProjectsLinkMenu = document.getElementById("mobile-projects-link-menu");
-  if (mobileProjectsLinkMenu && mobileHeader) {
-    mobileProjectsLinkMenu.addEventListener("click", function (event) {
+  // Hinweis: Da wir das mobile Menü-Overlay jetzt direkt mit dem Projektgrid befüllen,
+  // entfällt der bisherige Event-Listener für den "mobile-projects-link-menu".
+
+  /* ----------------------
+     Kontaktformular: Verhindern des Standard-Submit-Events
+  ----------------------- */
+  const contactFormDesktop = document.getElementById("contact-form-desktop");
+  const contactFormMobile = document.getElementById("contact-form-mobile");
+
+  if (contactFormDesktop) {
+    contactFormDesktop.addEventListener("submit", function (event) {
       event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active");
-      mobileHeader.classList.add("expanded", "projects-active");
-      // Falls das Menü geöffnet war, wieder schließen
-      if (menu.classList.contains("active")) {
-        menu.classList.remove("active");
-      }
+      // Hier kann z.B. per AJAX die Nachricht versendet werden
+      console.log("Desktop Kontaktformular abgeschickt!");
+      // Formular zurücksetzen
+      contactFormDesktop.reset();
     });
-  } else {
-    console.error("❌ Mobile Projects-Link im Menü nicht gefunden!");
   }
-  const mobileProjectsCloseBtn = document.getElementById("mobile-projects-close-btn");
-  if (mobileProjectsCloseBtn && mobileHeader) {
-    mobileProjectsCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active");
+
+  if (contactFormMobile) {
+    contactFormMobile.addEventListener("submit", function (event) {
+      event.preventDefault();
+      console.log("Mobile Kontaktformular abgeschickt!");
+      contactFormMobile.reset();
     });
-  } else {
-    console.error("❌ Mobile Projects-Schließ-Button nicht gefunden!");
   }
 });
