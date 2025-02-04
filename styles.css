@@ -220,7 +220,7 @@ button,
 .mobile-header .logo {
   font-size: 30px;
   text-decoration: none;
-  color: var(--text-color);
+  color: black;
 }
 
 .toggle_button {
