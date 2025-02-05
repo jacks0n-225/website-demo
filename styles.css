@@ -74,7 +74,8 @@ button,
   top: 42px; /* später per Media Query angepasst */
   left: 0;
   width: 30vw;
-  height: 100vh;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -83,6 +84,11 @@ button,
   overflow: visible;
   z-index: 100;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+}
+@supports (height: 100svh) {
+  .desktop-sidebar {
+    height: 100svh;
+  }
 }
 
 @media (min-width: 700px) {
@@ -145,10 +151,16 @@ button,
   font-size: 15px;
   text-align: justify;
   padding: 20px;
-  max-width: 90vw;
+  max-width: 80vw;
   width: 90vw;
-  max-height: 80vh;
+  /* Fallback: 80% der Viewport-Höhe */
+  max-height: calc(var(--vh) * 80);
   overflow-y: auto;
+}
+@supports (height: 100svh) {
+  .sidebar-expanded-content {
+    max-height: 80svh;
+  }
 }
 .sidebar-expanded-content.hello-content {
   text-align: center;
@@ -216,13 +228,11 @@ button,
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 10;
-  /* Normalerweise Box-Shadow – diese Regel wird im erweiterten Zustand überschrieben */
   box-shadow: 1px 0 6px rgba(0,0,0,0.5);
   transition: box-shadow 0.5s ease;
 }
 
 .mobile-header.expanded {
-  /* Beim Erweitern soll kein Schatten angezeigt werden */
   box-shadow: none;
 }
 
@@ -257,7 +267,6 @@ button,
 }
 
 /* Mobile erweiterte Inhaltsbereiche */
-/* Ausgangszustand: Höhe 0, unsichtbar */
 .mobile-expanded-content {
   width: 100%;
   height: 0;
@@ -270,25 +279,39 @@ button,
   z-index: 10;
 }
 
-/* Wenn der mobile Header erweitert ist, nehmen die Inhalte die volle verfügbare Höhe ein */
 .mobile-header.expanded.imprint-active .imprint-content,
 .mobile-header.expanded.about-active .about-content,
 .mobile-header.expanded.contact-active .contact-content,
 .mobile-header.expanded.projects-active .projects-content,
 .mobile-header.expanded.hello-active .hello-content {
-  height: calc(100svh - var(--navbar-height));
+  /* Fallback: Höhe = Viewporthöhe minus Navbar */
+  height: calc(var(--vh) - var(--navbar-height));
   opacity: 1;
   padding: 0 20px;
-  /* Hier kannst du zusätzlich Safe-Area-Inset (falls nötig) per env() anhängen */
   padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+@supports (height: 100svh) {
+  .mobile-header.expanded.imprint-active .imprint-content,
+  .mobile-header.expanded.about-active .about-content,
+  .mobile-header.expanded.contact-active .contact-content,
+  .mobile-header.expanded.projects-active .projects-content,
+  .mobile-header.expanded.hello-active .hello-content {
+    height: calc(100svh - var(--navbar-height));
+  }
 }
 
 /* Innerer Content */
 .mobile-content-text p {
   margin: 0;
   font-size: 12px;
-  max-height: 90svh;
+  /* Fallback: 90% der Viewport-Höhe */
+  max-height: calc(var(--vh) * 90);
   overflow-y: auto;
+}
+@supports (height: 100svh) {
+  .mobile-content-text p {
+    height: 90svh;
+  }
 }
 
 /* Mobile Schließ-Button */
@@ -323,7 +346,8 @@ button,
   top: 0;
   left: 0;
   width: 100%;
-  height: 100svh;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -335,6 +359,11 @@ button,
   transition: transform 0.4s ease-in-out;
   z-index: 1000;
   box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+}
+@supports (height: 100svh) {
+  .menu-overlay {
+    height: 100svh;
+  }
 }
 
 .menu-overlay .close_button {
@@ -351,7 +380,7 @@ button,
   color: darkgrey;
 }
 
-/* Damit das Projektgrid im Overlay passend dargestellt wird */
+/* Damit das Projektgrid im Overlay im passenden Verhältnis dargestellt wird */
 .menu-overlay .projects-grid {
   width: 90%;
 }
@@ -361,25 +390,41 @@ button,
   transform: translateX(0);
 }
 
-/* Projekte-Grid (wird bereits in beiden Bereichen genutzt) */
+/* Projekte-Grid */
 .projects-grid {
-  height: calc(100svh - 30vh);
+  /* Fallback: Höhe = 70% der Viewport-Höhe */
+  height: calc(var(--vh) * 70);
   display: grid;
-  gap: 2vh;
+  gap: calc(var(--vh) * 2);
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(3, 1fr);
+}
+@supports (height: 100svh) {
+  .projects-grid {
+    height: calc(100svh - 30svh);
+    /* Optional: Auch der gap-Wert könnte hier ersetzt werden */
+    /* gap: 2svh; */
+  }
 }
 
 /* Mobile Anpassung: 2 Spalten */
 @media (max-width: 699px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
-    margin: 20vh 5vw;
+    /* Fallback: margin in Viewport-Einheiten */
+    margin: calc(var(--vh) * 20) 5vw;
     width: calc(100vw - 20vw);
-    height: calc(100svh - 30vh);
+    height: calc(var(--vh) * 70);
     display: grid;
-    gap: 2vh;
+    gap: calc(var(--vh) * 2);
     grid-auto-rows: 1fr;
+  }
+
+  @supports (height: 100svh) {
+    .projects-grid {
+      height: calc(100svh - 20svh);
+      margin: 20svh 5vw;
+    }
   }
 }
 
@@ -399,9 +444,9 @@ button,
 
 .project-title {
   position: absolute;
-  top: 50%;              /* vertikale Mitte */
-  left: 50%;             /* horizontale Mitte */
-  transform: translate(-50%, -50%); /* exakte Zentrierung */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.5);
   color: var(--text-color);
   text-align: center;
@@ -423,11 +468,17 @@ button,
 -------------------- */
 .image-scroller {
   width: 100vw;
-  height: 100svh;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
   background: #222;
   overflow-x: auto;
   display: flex;
   scroll-behavior: smooth;
+}
+@supports (height: 100svh) {
+  .image-scroller {
+    height: 100svh;
+  }
 }
 
 .image-wrapper {
@@ -435,7 +486,13 @@ button,
   display: flex;
   justify-content: center;
   width: 90vw;
-  height: 100svh;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+}
+@supports (height: 100svh) {
+  .image-wrapper {
+    height: 100svh;
+  }
 }
 
 .image-wrapper img {
@@ -522,12 +579,18 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.static-image{
+.static-image {
   display: flex;
   justify-content: center;
   align-content: center;
   width: 100vw;
-  height: 100vh;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+}
+@supports (height: 100svh) {
+  .static-image {
+    height: 100svh;
+  }
 }
 
 /* --------------------
