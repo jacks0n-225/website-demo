@@ -151,7 +151,7 @@ button,
   font-size: 15px;
   text-align: justify;
   padding: 20px;
-  max-width: 80vw;
+  max-width: 70vw;
   width: 90vw;
   /* Fallback: 80% der Viewport-Höhe */
   max-height: calc(var(--vh) * 80);
@@ -305,12 +305,12 @@ button,
   margin: 0;
   font-size: 12px;
   /* Fallback: 90% der Viewport-Höhe */
-  max-height: calc(var(--vh) * 90);
+  max-height: calc(var(--vh) * 80);
   overflow-y: auto;
 }
 @supports (height: 100svh) {
   .mobile-content-text p {
-    height: 90svh;
+    height: 80svh;
   }
 }
 
