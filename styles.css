@@ -1,218 +1,615 @@
-document.addEventListener("DOMContentLoaded", function () {
-  /* ----------------------
-     MOBILE MENÜ-FUNKTIONALITÄT
-  ----------------------- */
-  const menu = document.getElementById("menu");
-  const menuToggle = document.getElementById("menu-toggle");
-  const menuClose = document.getElementById("menu-close");
-
-  if (menuToggle && menuClose && menu) {
-    menuToggle.addEventListener("click", function (event) {
-      event.preventDefault();
-      menu.classList.add("active");
-    });
-    menuClose.addEventListener("click", function (event) {
-      event.preventDefault();
-      menu.classList.remove("active");
-    });
-  } else {
-    console.error("❌ Mobile Menü-Elemente nicht gefunden!");
-  }
-
-  /* ----------------------
-     HORIZONTALES SCROLLING per Mausrad
-  ----------------------- */
-  const scroller = document.querySelector(".image-scroller");
-  const scrollSpeed = 10;
-  scroller.addEventListener("wheel", function (evt) {
-    evt.preventDefault();
-    scroller.scrollLeft += evt.deltaY * scrollSpeed;
-  });
-
-  /* ----------------------
-     DESKTOP: Erweitern der Sidebar für die unterschiedlichen Bereiche
-  ----------------------- */
-  const desktopSidebar = document.getElementById("desktop-sidebar");
-
-  // Imprint
-  const desktopImprintLink = document.getElementById("desktop-imprint-link");
-  if (desktopImprintLink && desktopSidebar) {
-    desktopImprintLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      desktopSidebar.classList.add("expanded", "imprint-active");
-    });
-  } else {
-    console.error("❌ Desktop Imprint-Link oder Sidebar nicht gefunden!");
-  }
-
-  // About
-  const desktopAboutLink = document.getElementById("desktop-about-link");
-  if (desktopAboutLink && desktopSidebar) {
-    desktopAboutLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      desktopSidebar.classList.add("expanded", "about-active");
-    });
-  } else {
-    console.error("❌ Desktop About-Link nicht gefunden!");
-  }
-
-  // Contact
-  const desktopContactLink = document.getElementById("desktop-contact-link");
-  if (desktopContactLink && desktopSidebar) {
-    desktopContactLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      desktopSidebar.classList.add("expanded", "contact-active");
-    });
-  } else {
-    console.error("❌ Desktop Contact-Link nicht gefunden!");
-  }
-
-  // Projects (Desktop)
-  const desktopProjectsLink = document.getElementById("desktop-projects-link");
-  if (desktopProjectsLink && desktopSidebar) {
-    desktopProjectsLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      desktopSidebar.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      desktopSidebar.classList.add("expanded", "projects-active");
-    });
-  } else {
-    console.error("❌ Desktop Projects-Link nicht gefunden!");
-  }
-
-  // HELLO – Diese Seite soll beim Laden als erstes angezeigt werden
-  const desktopHelloCloseBtn = document.getElementById("hello-close-btn");
-  if (desktopHelloCloseBtn && desktopSidebar) {
-    // Beim Laden automatisch den HELLO-Bereich anzeigen
-    desktopSidebar.classList.add("expanded", "hello-active");
-    desktopHelloCloseBtn.addEventListener("click", function () {
-      desktopSidebar.classList.remove("expanded", "hello-active");
-    });
-  } else {
-    console.error("❌ Desktop Hello-Schließ-Button nicht gefunden!");
-  }
-
-  // Sidebar-Schließ-Button (für die anderen Bereiche)
-  const sidebarCloseBtn = document.getElementById("sidebar-close-btn");
-  if (sidebarCloseBtn && desktopSidebar) {
-    sidebarCloseBtn.addEventListener("click", function () {
-      desktopSidebar.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-    });
-  } else {
-    console.error("❌ Desktop Sidebar-Schließ-Button nicht gefunden!");
-  }
-
-  /* ----------------------
-     MOBILE: Erweitern des Headers für die unterschiedlichen Bereiche
-  ----------------------- */
-  const mobileHeader = document.getElementById("mobile-header");
-
-  // Imprint
-  const mobileImprintLink = document.getElementById("mobile-imprint-link");
-  const mobileImprintCloseBtn = document.getElementById("mobile-imprint-close-btn");
-  if (mobileImprintLink && mobileHeader) {
-    mobileImprintLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      mobileHeader.classList.add("expanded", "imprint-active");
-    });
-  } else {
-    console.error("❌ Mobile Imprint-Link nicht gefunden!");
-  }
-  if (mobileImprintCloseBtn && mobileHeader) {
-    mobileImprintCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-    });
-  } else {
-    console.error("❌ Mobile Imprint-Schließ-Button nicht gefunden!");
-  }
-
-  // About
-  const mobileAboutLink = document.getElementById("mobile-about-link");
-  const mobileAboutCloseBtn = document.getElementById("mobile-about-close-btn");
-  if (mobileAboutLink && mobileHeader) {
-    mobileAboutLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      mobileHeader.classList.add("expanded", "about-active");
-    });
-  } else {
-    console.error("❌ Mobile About-Link nicht gefunden!");
-  }
-  if (mobileAboutCloseBtn && mobileHeader) {
-    mobileAboutCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-    });
-  } else {
-    console.error("❌ Mobile About-Schließ-Button nicht gefunden!");
-  }
-
-  // Contact
-  const mobileContactLink = document.getElementById("mobile-contact-link");
-  const mobileContactCloseBtn = document.getElementById("mobile-contact-close-btn");
-  if (mobileContactLink && mobileHeader) {
-    mobileContactLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      mobileHeader.classList.remove("imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-      mobileHeader.classList.add("expanded", "contact-active");
-    });
-  } else {
-    console.error("❌ Mobile Contact-Link nicht gefunden!");
-  }
-  if (mobileContactCloseBtn && mobileHeader) {
-    mobileContactCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "imprint-active", "about-active", "contact-active", "projects-active", "hello-active");
-    });
-  } else {
-    console.error("❌ Mobile Contact-Schließ-Button nicht gefunden!");
-  }
-
-  // HELLO – Auch im Mobile-Bereich soll der HELLO-Inhalt initial angezeigt werden
-  const mobileHelloCloseBtn = document.getElementById("mobile-hello-close-btn");
-  if (mobileHelloCloseBtn && mobileHeader) {
-    // Beim Laden den HELLO-Bereich anzeigen
-    mobileHeader.classList.add("expanded", "hello-active");
-    mobileHelloCloseBtn.addEventListener("click", function () {
-      mobileHeader.classList.remove("expanded", "hello-active");
-    });
-  } else {
-    console.error("❌ Mobile Hello-Schließ-Button nicht gefunden!");
-  }
-
-  // Hinweis: Da wir das mobile Menü-Overlay jetzt direkt mit dem Projektgrid befüllen,
-  // entfällt der bisherige Event-Listener für den "mobile-projects-link-menu".
-
-  /* ----------------------
-     Kontaktformular: Verhindern des Standard-Submit-Events
-  ----------------------- */
-  const contactFormDesktop = document.getElementById("contact-form-desktop");
-  const contactFormMobile = document.getElementById("contact-form-mobile");
-
-  if (contactFormDesktop) {
-    contactFormDesktop.addEventListener("submit", function (event) {
-      event.preventDefault();
-      // Hier kann z.B. per AJAX die Nachricht versendet werden
-      console.log("Desktop Kontaktformular abgeschickt!");
-      // Formular zurücksetzen
-      contactFormDesktop.reset();
-    });
-  }
-
-  if (contactFormMobile) {
-    contactFormMobile.addEventListener("submit", function (event) {
-      event.preventDefault();
-      console.log("Mobile Kontaktformular abgeschickt!");
-      contactFormMobile.reset();
-    });
-  }
-  
-  function setVh() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
+/* --- RESET & GRUNDSTILE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-setVh();
-window.addEventListener('resize', setVh);
-  
-});
+:root {
+  --background-color: #808080;
+  --text-color: #FFFFFF;
+  --navbar-height: 60px;  /* Höhe der oberen Zeile (Logo/Hamburger) */
+  --mobile-btn-size: 60px;
+}
+
+/* --- Schriftarten --- */
+@font-face {
+  font-family: 'Greycliff';
+  src: url('fonts/GreycliffCF-Medium.woff2') format('woff2'),
+       url('fonts/GreycliffCF-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Greycliff';
+  src: url('fonts/GreycliffCF-Bold.woff2') format('woff2'),
+       url('fonts/GreycliffCF-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Greycliff', Arial, sans-serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Allgemeine Hover-Regeln --- */
+a,
+button,
+.toggle_button .bar,
+.desktop-sidebar .logo,
+.imprint-link,
+.mobile-footer .imprint-link,
+.mobile-close-btn span.x,
+.close_button,
+.menu-overlay a,
+.footer-link {
+  transition: color 0.4s;
+}
+
+/* Desktop-Hover */
+.desktop-sidebar .logo:hover,
+.desktop-sidebar .nav-links a:hover,
+.desktop-sidebar .imprint-link:hover {
+  color: darkgrey;
+}
+
+/* Mobile-Hover */
+.mobile-header .logo:hover,
+.mobile-footer .imprint-link:hover,
+.footer-link:hover {
+  color: darkgrey;
+}
+.toggle_button:hover .bar {
+  background-color: darkgrey;
+}
+
+/* --------------------
+   DESKTOP SIDEBAR
+-------------------- */
+.desktop-sidebar {
+  position: fixed;
+  top: 42px; /* später per Media Query angepasst */
+  left: 0;
+  width: 30vw;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px;
+  transition: width 0.4s ease;
+  overflow: visible;
+  z-index: 100;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+}
+@supports (height: 100svh) {
+  .desktop-sidebar {
+    height: 100svh;
+  }
+}
+
+@media (min-width: 700px) {
+  .desktop-sidebar {
+    top: 0;
+  }
+}
+
+.desktop-sidebar.expanded {
+  width: 100vw; /* Erweitert die Sidebar auf die volle Breite */
+}
+
+.desktop-sidebar.expanded .nav-links {
+  display: none;
+}
+
+.desktop-sidebar .logo-wrapper {
+  text-align: center;
+}
+
+.desktop-sidebar .logo {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.desktop-sidebar .nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.desktop-sidebar .nav-links li {
+  margin: 15px 0;
+}
+
+.desktop-sidebar .nav-links a {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+/* --------------------
+   IMPRINT / ABOUT / CONTACT / PROJECTS-BEREICH DESKTOP
+-------------------- */
+.sidebar-expanded-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-color);
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  display: none;
+  font-size: 15px;
+  text-align: justify;
+  padding: 20px;
+  max-width: 70vw;
+  width: 90vw;
+  /* Fallback: 80% der Viewport-Höhe */
+  max-height: calc(var(--vh) * 80);
+  overflow-y: auto;
+}
+@supports (height: 100svh) {
+  .sidebar-expanded-content {
+    max-height: 80svh;
+  }
+}
+.sidebar-expanded-content.hello-content {
+  text-align: center;
+}
+.desktop-sidebar.expanded.hello-active .sidebar-close-btn {
+  display: none;
+}
+
+.desktop-sidebar.expanded.imprint-active .imprint-content,
+.desktop-sidebar.expanded.about-active .about-content,
+.desktop-sidebar.expanded.contact-active .contact-content,
+.desktop-sidebar.expanded.projects-active .projects-content,
+.desktop-sidebar.expanded.hello-active .hello-content {
+  display: block;
+  opacity: 1;
+}
+
+/* Desktop Imprint-Link (unten) */
+.desktop-imprint-link {
+  font-size: 18px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.sidebar-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.desktop-sidebar.expanded .sidebar-close-btn {
+  display: block;
+}
+
+/* Spezieller Stil für den HELLO-Schließ-Button in der Desktop Sidebar */
+.hello-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 4em; /* Extrem große Schrift */
+  cursor: pointer;
+}
+
+/* --------------------
+   MOBILE HEADER & INHALT
+-------------------- */
+.mobile-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
+  box-shadow: 1px 0 6px rgba(0,0,0,0.5);
+  transition: box-shadow 0.5s ease;
+}
+
+.mobile-header.expanded {
+  box-shadow: none;
+}
+
+.header-top {
+  height: var(--navbar-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.mobile-header .logo {
+  font-size: 30px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.toggle_button {
+  width: 30px;
+  height: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.bar {
+  height: 4px;
+  width: 100%;
+  background: var(--text-color);
+  border-radius: 100px;
+}
+
+/* Mobile erweiterte Inhaltsbereiche */
+.mobile-expanded-content {
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+  padding: 0 20px;
+  color: var(--text-color);
+  box-shadow: none;
+  z-index: 10;
+}
+
+.mobile-header.expanded.imprint-active .imprint-content,
+.mobile-header.expanded.about-active .about-content,
+.mobile-header.expanded.contact-active .contact-content,
+.mobile-header.expanded.projects-active .projects-content,
+.mobile-header.expanded.hello-active .hello-content {
+  /* Fallback: Höhe = Viewporthöhe minus Navbar */
+  height: calc(var(--vh) - var(--navbar-height));
+  opacity: 1;
+  padding: 0 20px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+}
+@supports (height: 100svh) {
+  .mobile-header.expanded.imprint-active .imprint-content,
+  .mobile-header.expanded.about-active .about-content,
+  .mobile-header.expanded.contact-active .contact-content,
+  .mobile-header.expanded.projects-active .projects-content,
+  .mobile-header.expanded.hello-active .hello-content {
+    height: calc(100svh - var(--navbar-height));
+  }
+}
+
+/* Innerer Content */
+.mobile-imprint-text p {
+  margin: 0;
+  font-size: 12px;
+  /* Fallback: 90% der Viewport-Höhe */
+  overflow-y: auto;
+  max-height: calc(var(--vh) * 80);
+}
+@supports (height: 100svh) {
+  .mobile-imprint-text p {
+    height: 80svh;
+  }
+}
+
+/* Mobile Schließ-Button */
+.mobile-close-btn {
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 20px;
+}
+
+/* Spezieller Stil für den HELLO-Button im Mobile-Bereich */
+.mobile-hello-btn {
+  text-align: center;
+  font-size: 3em;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 20px;
+}
+
+.mobile-expanded-content.hello-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --------------------
+   MENU OVERLAY (MOBILE)
+-------------------- */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 1000;
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+}
+@supports (height: 100svh) {
+  .menu-overlay {
+    height: 100svh;
+  }
+}
+
+.menu-overlay .close_button {
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  font-size: 40px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.menu-overlay .close_button:hover {
+  color: darkgrey;
+}
+
+/* Damit das Projektgrid im Overlay im passenden Verhältnis dargestellt wird */
+.menu-overlay .projects-grid {
+  width: 90%;
+}
+
+/* Aktiv: Overlay sichtbar */
+.menu-overlay.active {
+  transform: translateX(0);
+}
+
+/* Projekte-Grid */
+.projects-grid {
+  /* Fallback: Höhe = 70% der Viewport-Höhe */
+  height: calc(var(--vh) * 70);
+  display: grid;
+  gap: calc(var(--vh) * 2);
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(3, 1fr);
+}
+@supports (height: 100svh) {
+  .projects-grid {
+    height: calc(100svh - 30svh);
+    /* Optional: Auch der gap-Wert könnte hier ersetzt werden */
+    /* gap: 2svh; */
+  }
+}
+
+/* Mobile Anpassung: 2 Spalten */
+@media (max-width: 699px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Fallback: margin in Viewport-Einheiten */
+    margin: calc(var(--vh) * 20) 5vw;
+    width: calc(100vw - 20vw);
+    height: calc(var(--vh) * 70);
+    display: grid;
+    gap: calc(var(--vh) * 2);
+    grid-auto-rows: 1fr;
+  }
+
+  @supports (height: 100svh) {
+    .projects-grid {
+      height: calc(100svh - 20svh);
+      margin: 20svh 5vw;
+    }
+  }
+}
+
+.project-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+} 
+
+.project-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text-color);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 5px 10px;
+}
+
+.project-item img:hover {
+  filter: grayscale(0%);
+} 
+
+.project-item:hover .project-title {
+  opacity: 1;
+}
+
+/* --------------------
+   HORIZONTALES SCROLLING
+-------------------- */
+.image-scroller {
+  width: 100vw;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+  background: #222;
+  overflow-x: auto;
+  display: flex;
+  scroll-behavior: smooth;
+}
+@supports (height: 100svh) {
+  .image-scroller {
+    height: 100svh;
+  }
+}
+
+.image-wrapper {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 90vw;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+}
+@supports (height: 100svh) {
+  .image-wrapper {
+    height: 100svh;
+  }
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------
+   Formular-Styling
+-------------------- */
+form {
+  margin-top: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.form-group input {
+  height: 35px;
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+button[type="submit"] {
+  background-color: var(--text-color);
+  color: #000;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+button[type="submit"]:hover {
+  background-color: darkgrey;
+}
+
+/* --------------------
+   Stil für das About-Bild
+-------------------- */
+.about-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* --------------------
+   MOBILE FOOTER
+-------------------- */
+.mobile-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  gap: 10vw;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-footer a {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.static-image {
+  display: flex;
+  position:fixed;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  /* Fallback: 100% der Viewport-Höhe */
+  height: calc(var(--vh) * 100);
+}
+@supports (height: 100svh) {
+  .static-image {
+    height: 100svh;
+  }
+}
+
+/* --------------------
+   SCROLLBAR AUSBLENDEN
+-------------------- */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* --------------------
+   MEDIA QUERIES
+-------------------- */
+@media (min-width: 700px) {
+  .desktop-sidebar { display: block; }
+  .mobile-header,
+  .mobile-footer { display: none; }
+}
+@media (max-width: 699px) {
+  .desktop-sidebar { display: none; }
+}
