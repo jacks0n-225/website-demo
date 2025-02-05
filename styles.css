@@ -301,15 +301,15 @@ button,
 }
 
 /* Innerer Content */
-.mobile-content-text p {
+.mobile-imprint-text p {
   margin: 0;
   font-size: 12px;
   /* Fallback: 90% der Viewport-Höhe */
-  max-height: calc(var(--vh) * 80);
   overflow-y: auto;
+  max-height: calc(var(--vh) * 80);
 }
 @supports (height: 100svh) {
-  .mobile-content-text p {
+  .mobile-imprint-text p {
     height: 80svh;
   }
 }
@@ -581,6 +581,7 @@ button[type="submit"]:hover {
 
 .static-image {
   display: flex;
+  position:fixed;
   justify-content: center;
   align-content: center;
   width: 100vw;
