@@ -1,3 +1,4 @@
+
 /* --- RESET & GRUNDSTILE --- */
 * {
   margin: 0;
@@ -189,8 +190,8 @@ button,
 
 .sidebar-close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 100px;
+  right: 50%;
   display: none;
   background: transparent;
   border: none;
@@ -214,41 +215,30 @@ button,
 }
 
 .sidebar-expanded-content.hello-content .hello-text h1 {
-  font-size: 15vw;
+  font-size: 10vw;
   margin: 0 0 1rem 0;
   padding: 0;
   white-space: nowrap;
 }
 
 .mobile-expanded-content.hello-content .hello-text h1 {
-  font-size: 28vw;
+  font-size: 20vw;
   margin: 0 0 1rem 0;
   padding: 0;
   white-space: nowrap;
   color: var(--text-color);
 }
 
-.sidebar-expanded-content.hello-content .hello-text p {
-  font-size: 3vw;
-  margin: 0 auto 2rem auto;
-  text-align: justify;
-  padding: 0;
-  max-width: 40rem;
-}
-
-.mobile-expanded-content.hello-content .hello-text p {
-  font-size: 6vw;
-  margin: 0 auto 2rem auto;
-  text-align: justify;
-  padding: 0;
-  max-width: 40rem;
-  color: var(--text-color);
-}
-
 /* Button in normaler Größe */
-.hello-close-btn,
-.mobile-hello-btn {
+.hello-close-btn {
   font-size: 2vw; 
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.mobile-hello-btn {
+  font-size: 4vw !important; 
   padding: 0.5rem 1rem;
   margin: 0 auto;
   display: inline-block;
@@ -347,7 +337,7 @@ button,
 .mobile-expanded-content.contact-content {
   position: relative;
   overflow: hidden;
-  font-size: 15px;
+  font-size: 10px;
   color: var(--text-color);
 }
 
@@ -367,7 +357,7 @@ button,
 .mobile-expanded-content.about-content .mobile-close-btn,
 .mobile-expanded-content.contact-content .mobile-close-btn {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 3em;
   cursor: pointer;
   color: var(--text-color);
   line-height: 50px; /* Gleiche Höhe wie der Container */
@@ -460,7 +450,7 @@ button,
   position: absolute;
   top: 10px;
   right: 22px;
-  font-size: 40px;
+  font-size: 3em;
   cursor: pointer;
   color: white;
   text-decoration: none;
@@ -598,6 +588,12 @@ form {
   margin-bottom: 5px;
   font-size: 14px;
 }
+
+@media(max-width: 699px){
+ .form-group label {
+  font-size: 10px;
+} 
+}
 .form-group input,
 .form-group textarea {
   width: 100%;
@@ -622,6 +618,13 @@ button[type="submit"] {
   cursor: pointer;
   font-size: 14px;
 }
+
+@media(max-width: 699px){
+  button[type="submit"]{
+  font-size: 10px;
+}
+}
+
 button[type="submit"]:hover {
   background-color: darkgrey;
 }
@@ -629,11 +632,21 @@ button[type="submit"]:hover {
 /* --------------------
    Stil für das About-Bild
 -------------------- */
+.about-image-container {
+  width: 100%;
+  aspect-ratio: 20 / 9; /* Definiert das gewünschte Seitenverhältnis */
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
 .about-image {
   width: 100%;
-  height: auto;
-  margin-bottom: 15px;
+  height: 100%;
+  object-fit: cover;   /* Skaliert das Bild so, dass der Container vollständig gefüllt wird */
+  object-position: center; /* Zentriert das Bild innerhalb des Containers */
+  display: block;
 }
+
 
 /* --------------------
    MOBILE FOOTER
