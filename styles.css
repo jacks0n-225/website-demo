@@ -165,10 +165,8 @@ button,
 .sidebar-expanded-content.hello-content {
   text-align: center;
 }
-.desktop-sidebar.expanded.hello-active .sidebar-close-btn {
-  display: none;
-}
 
+/* Sichtbar, wenn Sidebar erweitert ist */
 .desktop-sidebar.expanded.imprint-active .imprint-content,
 .desktop-sidebar.expanded.about-active .about-content,
 .desktop-sidebar.expanded.contact-active .contact-content,
@@ -207,12 +205,53 @@ button,
 }
 
 /* Spezieller Stil für den HELLO-Schließ-Button in der Desktop Sidebar */
-.hello-close-btn {
-  background: transparent;
-  border: none;
+.sidebar-expanded-content.hello-content
+.mobile-expanded-content.hello-content {
+  text-align: justify; /* Statt justify, um alles zu zentrieren */
+  padding: 20px;
+  max-width: 70vw;
+  width: auto;
+}
+
+.sidebar-expanded-content.hello-content .hello-text h1 {
+  font-size: 15vw;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.mobile-expanded-content.hello-content .hello-text h1 {
+  font-size: 28vw;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  white-space: nowrap;
   color: var(--text-color);
-  font-size: 4em; /* Extrem große Schrift */
-  cursor: pointer;
+}
+
+.sidebar-expanded-content.hello-content .hello-text p {
+  font-size: 3vw;
+  margin: 0 auto 2rem auto;
+  text-align: justify;
+  padding: 0;
+  max-width: 40rem;
+}
+
+.mobile-expanded-content.hello-content .hello-text p {
+  font-size: 6vw;
+  margin: 0 auto 2rem auto;
+  text-align: justify;
+  padding: 0;
+  max-width: 40rem;
+  color: var(--text-color);
+}
+
+/* Button in normaler Größe */
+.hello-close-btn,
+.mobile-hello-btn {
+  font-size: 2vw; 
+  padding: 0.5rem 1rem;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 /* --------------------
@@ -273,23 +312,23 @@ button,
   opacity: 0;
   overflow: hidden;
   transition: height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-  padding: 0 20px;
-  color: var(--text-color);
+  /* Keine extra Padding, da wir in den betroffenen Bereichen eigene Scrollcontainer nutzen */
   box-shadow: none;
   z-index: 10;
 }
 
+/* Standard-Regelung für alle Expanded-Bereiche im Mobile Header */
 .mobile-header.expanded.imprint-active .imprint-content,
 .mobile-header.expanded.about-active .about-content,
 .mobile-header.expanded.contact-active .contact-content,
 .mobile-header.expanded.projects-active .projects-content,
 .mobile-header.expanded.hello-active .hello-content {
-  /* Fallback: Höhe = Viewporthöhe minus Navbar */
-  height: calc(var(--vh) - var(--navbar-height));
+  /* Höhe so anpassen, dass 60px unten frei bleiben */
+  height: calc(var(--vh) - var(--navbar-height) - 60px);
   opacity: 1;
-  padding: 0 20px;
-  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  padding: 0 0 60px 0; /* 60px Padding unten */
 }
+
 @supports (height: 100svh) {
   .mobile-header.expanded.imprint-active .imprint-content,
   .mobile-header.expanded.about-active .about-content,
@@ -297,24 +336,71 @@ button,
   .mobile-header.expanded.projects-active .projects-content,
   .mobile-header.expanded.hello-active .hello-content {
     height: calc(100svh - var(--navbar-height));
+    padding: 0 0 60px 0; /* 60px Padding unten */
   }
 }
 
-/* Innerer Content */
-.mobile-imprint-text p {
-  margin: 0;
-  font-size: 12px;
-  /* Fallback: 90% der Viewport-Höhe */
+/* --- Spezifisch: Mobile Bereiche mit fixiertem Close-Button und scrollbarem Inhalt --- */
+/* Für Imprint, About und Contact */
+.mobile-expanded-content.imprint-content,
+.mobile-expanded-content.about-content,
+.mobile-expanded-content.contact-content {
+  position: relative;
+  overflow: hidden;
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+.mobile-expanded-content.imprint-content .mobile-close-container,
+.mobile-expanded-content.about-content .mobile-close-container,
+.mobile-expanded-content.contact-content .mobile-close-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px; /* Höhe des fixierten Bereichs */
+  z-index: 11;
+  background: rgba(0,0,0,0);
+}
+
+.mobile-expanded-content.imprint-content .mobile-close-btn,
+.mobile-expanded-content.about-content .mobile-close-btn,
+.mobile-expanded-content.contact-content .mobile-close-btn {
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--text-color);
+  line-height: 50px; /* Gleiche Höhe wie der Container */
+}
+
+/* Hier wird nun die Höhe so berechnet, dass 60px extra am unteren Rand sichtbar sind – dank box-sizing: content-box */
+.mobile-expanded-content.imprint-content .mobile-scrollable-content,
+.mobile-expanded-content.about-content .mobile-scrollable-content,
+.mobile-expanded-content.contact-content .mobile-scrollable-content {
+  margin-top: 90px; /* Platz für den fixierten Close-Button */
+  box-sizing: content-box;
+  height: calc(100% - 50px - 60px); /* 60px werden extra hinzugefügt */
   overflow-y: auto;
-  max-height: calc(var(--vh) * 80);
+  padding: 10vw;
+  padding-top: 0;
+  padding-bottom: 60px; /* Der gewünschte untere Abstand */
+  position: relative;
 }
 @supports (height: 100svh) {
-  .mobile-imprint-text p {
-    height: 80svh;
+  .mobile-expanded-content.imprint-content .mobile-scrollable-content,
+  .mobile-expanded-content.about-content .mobile-scrollable-content,
+  .mobile-expanded-content.contact-content .mobile-scrollable-content {
+    box-sizing: content-box;
+    height: calc(100svh - var(--navbar-height) - 50px - 60px);
+    padding: 10vw;
+    padding-top: 0;
+    padding-bottom: 60px;
+    position: relative;
   }
 }
 
-/* Mobile Schließ-Button */
+*/
+/* Mobile Schließ-Button (für Bereiche ohne extra Container) */
 .mobile-close-btn {
   text-align: center;
   font-size: 1.5em;
@@ -334,8 +420,13 @@ button,
 
 .mobile-expanded-content.hello-content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.desktop-sidebar.expanded.hello-active .sidebar-close-btn {
+  display: none !important;
 }
 
 /* --------------------
@@ -346,7 +437,6 @@ button,
   top: 0;
   left: 0;
   width: 100%;
-  /* Fallback: 100% der Viewport-Höhe */
   height: calc(var(--vh) * 100);
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
@@ -392,7 +482,6 @@ button,
 
 /* Projekte-Grid */
 .projects-grid {
-  /* Fallback: Höhe = 70% der Viewport-Höhe */
   height: calc(var(--vh) * 70);
   display: grid;
   gap: calc(var(--vh) * 2);
@@ -402,8 +491,6 @@ button,
 @supports (height: 100svh) {
   .projects-grid {
     height: calc(100svh - 30svh);
-    /* Optional: Auch der gap-Wert könnte hier ersetzt werden */
-    /* gap: 2svh; */
   }
 }
 
@@ -411,7 +498,6 @@ button,
 @media (max-width: 699px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* Fallback: margin in Viewport-Einheiten */
     margin: calc(var(--vh) * 20) 5vw;
     width: calc(100vw - 20vw);
     height: calc(var(--vh) * 70);
@@ -419,7 +505,6 @@ button,
     gap: calc(var(--vh) * 2);
     grid-auto-rows: 1fr;
   }
-
   @supports (height: 100svh) {
     .projects-grid {
       height: calc(100svh - 20svh);
@@ -468,7 +553,6 @@ button,
 -------------------- */
 .image-scroller {
   width: 100vw;
-  /* Fallback: 100% der Viewport-Höhe */
   height: calc(var(--vh) * 100);
   background: #222;
   overflow-x: auto;
@@ -486,7 +570,6 @@ button,
   display: flex;
   justify-content: center;
   width: 90vw;
-  /* Fallback: 100% der Viewport-Höhe */
   height: calc(var(--vh) * 100);
 }
 @supports (height: 100svh) {
@@ -581,11 +664,10 @@ button[type="submit"]:hover {
 
 .static-image {
   display: flex;
-  position:fixed;
+  position: fixed;
   justify-content: center;
   align-content: center;
   width: 100vw;
-  /* Fallback: 100% der Viewport-Höhe */
   height: calc(var(--vh) * 100);
 }
 @supports (height: 100svh) {
