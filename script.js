@@ -181,9 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("❌ Mobile Hello-Schließ-Button nicht gefunden!");
   }
 
-  // Hinweis: Da wir das mobile Menü-Overlay jetzt direkt mit dem Projektgrid befüllen,
-  // entfällt der bisherige Event-Listener für den "mobile-projects-link-menu".
-
   /* ----------------------
      Kontaktformular: Verhindern des Standard-Submit-Events
   ----------------------- */
@@ -209,10 +206,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   
   function setVh() {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-setVh();
-window.addEventListener('resize', setVh);
-  
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
 });
